@@ -60,6 +60,12 @@
             </ul>
           </li>
           <li>
+            <a href="#">留言管理</a>
+            <ul class="sub-menu">
+              <li><a href="admin_message.php"><i class="icon-font">&#xe986;</i>留言查看</a></li>
+            </ul>
+          </li>
+          <li>
             <a href="#">系统管理</a>
             <ul class="sub-menu">
               <li><a href="admin_chpwd.php"><i class="icon-font">&#xe991;</i>密码修改</a></li>

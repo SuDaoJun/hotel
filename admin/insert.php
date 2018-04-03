@@ -42,11 +42,45 @@
   //新增房间
   if($_POST["action"]=="inserth")
   {
+        // 允许上传的图片后缀
+      $allowedExts = array("gif", "jpeg", "jpg", "png");
+      $temp = explode(".", $_FILES["file"]["name"]);
+      $extension = end($temp);     // 获取文件后缀名
+      if ((($_FILES["file"]["type"] == "image/gif")
+      || ($_FILES["file"]["type"] == "image/jpeg")
+      || ($_FILES["file"]["type"] == "image/jpg")
+      || ($_FILES["file"]["type"] == "image/pjpeg")
+      || ($_FILES["file"]["type"] == "image/x-png")
+      || ($_FILES["file"]["type"] == "image/png"))
+      && ($_FILES["file"]["size"] < 2048000)
+      && in_array($extension, $allowedExts))
+      {
+        if ($_FILES["file"]["error"] > 0)
+        {
+            echo "错误：: " . $_FILES["file"]["error"] . "<br>";
+            echo "<script>history.go(-1);</script>";
+        }
+        else
+        {
+            if (file_exists("../images/" . $_FILES["file"]["name"]))
+            {
+                echo $_FILES["file"]["name"] . " 文件已经存在。 ";
+            }
+            else
+            {
+                move_uploaded_file($_FILES["file"]["tmp_name"], "../images/" . $_FILES["file"]["name"]);
+                echo "文件存储在: " . "../images/" . $_FILES["file"]["name"];
+            }
+        }
+      }
+    else
+    {
+      echo "<script>alert('非法的文件格式');history.go(-1);</script>";
+    }
+
     
-    $sql = "insert into room (roomid,typeid,status,pic,remarks) values('".$_POST["roomid"]."','".$_POST["typeid"]."','".$_POST["status"]."','".$_POST["pic"]."','".@$_POST["remarks"]."')";
+    $sql = "insert into room (roomid,typeid,status,pic,remarks) values('".$_POST["roomid"]."','".$_POST["typeid"]."','".$_POST["status"]."','".$_FILES["file"]["name"]."','".@$_POST["remarks"]."')";
     $arr=mysqli_query($db_link,$sql);
-
-
     if ($arr)
     {
       //更新roomtype表中totalnum字段

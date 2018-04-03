@@ -19,5 +19,12 @@
   
     echo "<script language=javascript>alert('在线预订成功');window.location='order_query.php'</script>";
   }
+  //留言
+  if($_POST["action"]=="message"){
+       //在message表中插入一条记录
+    $sql1 = "insert into message(title,name,mailbox,phone,content) values('".$_POST["title"]."','".$_POST["name"]."','".$_POST["mailbox"]."','".$_POST["phone"]."','".$_POST["content"]."')";
+    mysqli_query($db_link,$sql1) or die ("在message表中插入记录失败");
+    echo "<script language=javascript>alert('留言提交成功');window.location='about.php'</script>";
+  }
 ?>
 

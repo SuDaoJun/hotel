@@ -14,6 +14,14 @@ $(function() {
 $("#main-menu #nav_0").addClass("active");
 });
 </script>
+<style>
+    .room-container .room-box .img-container img{
+        height: 196px;
+    }
+    .room-container .room-box .details{
+        min-height: 192px;
+    }
+</style>
 <title>宾馆管理</title>
 </head>
 <body class="homepage trans-header sticky white-datepicker">
@@ -58,7 +66,7 @@ require("head.html");
 <div class="row">
     <?php
       require("dbconnect.php");
-      $sql="select a.pic,a.remarks,b.typename,b.price from room a,roomtype b where a.typeid=b.typeid limit 8";
+      $sql="select a.pic,a.remarks,b.typename,b.price from room a,roomtype b where a.typeid=b.typeid order by roomid asc limit 8";
       $arr=mysqli_query($db_link,$sql);
       while($rows=mysqli_fetch_assoc($arr)){
     ?>

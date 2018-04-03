@@ -143,9 +143,9 @@ $("#booking-btn").click(function() {
 
 </div>
 <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-<script type="text/javascript" src="js/helper.js"></script>
-<script src="js/template.js" type="text/javascript">
-</script>
+<script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/helper.js"></script>
+<script type="text/javascript" src="js/template.js"></script>
 
 <?php
 require("footer.html");

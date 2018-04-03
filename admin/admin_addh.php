@@ -61,6 +61,12 @@
             </ul>
           </li>
           <li>
+            <a href="#">留言管理</a>
+            <ul class="sub-menu">
+              <li><a href="admin_message.php"><i class="icon-font">&#xe986;</i>留言查看</a></li>
+            </ul>
+          </li>
+          <li>
             <a href="#">系统管理</a>
             <ul class="sub-menu">
               <li><a href="admin_chpwd.php"><i class="icon-font">&#xe991;</i>密码修改</a></li>
@@ -76,7 +82,7 @@
         <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">新增房间</span></div>
       </div>
       <div class="result-wrap">
-        <form id="myform" name="myform" method="post" action="insert.php" >
+        <form enctype="multipart/form-data" id="myform" name="myform" method="post" action="insert.php" >
           <table width="100%" height="173" border="0" align="center" cellpadding="2" cellspacing="1" class="result-tab">
             <tr>
               <td width="8%" align="right" class="td_bg">房间编号：</td>
@@ -114,7 +120,7 @@
             </tr>
             <tr>
               <td width="8%" align="right" class="td_bg">房间图片：</td>
-              <td width="92%" class="td_bg"> <input name="pic" type="file" id="pic"  /></td>
+              <td width="92%" class="td_bg"> <input name="file" type="file" id="file"  /></td>
             </tr>
             <tr>
               <td align="right" class="td_bg">房间描述：</td>

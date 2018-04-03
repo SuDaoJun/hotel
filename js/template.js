@@ -78,20 +78,20 @@ jQuery(document).ready(function() {
     });
 
     // Enable isotop for gallery
-    var mainContainer = jQuery(".image-main-box");
-    mainContainer.isotope({
-        transitionDuration: "0.7s"
-    });
-    mainContainer.imagesLoaded( function() {
-        mainContainer.isotope("layout");
-        jQuery(".sort-section-container").on( "click", "a", function(e) {
-            e.preventDefault();
-            jQuery(".sort-section-container a").removeClass("active");
-            jQuery(this).addClass("active");
-            var filterValue = jQuery(this).attr("data-filter");
-            mainContainer.isotope({ filter: filterValue });
-        });
-    });
+    // var mainContainer = jQuery(".image-main-box");
+    // mainContainer.isotope({
+    //     transitionDuration: "0.7s"
+    // });
+    // mainContainer.imagesLoaded( function() {
+    //     mainContainer.isotope("layout");
+    //     jQuery(".sort-section-container").on( "click", "a", function(e) {
+    //         e.preventDefault();
+    //         jQuery(".sort-section-container a").removeClass("active");
+    //         jQuery(this).addClass("active");
+    //         var filterValue = jQuery(this).attr("data-filter");
+    //         mainContainer.isotope({ filter: filterValue });
+    //     });
+    // });
 
     // Service & Staff Slider
     jQuery("#services-box, #staff-slider").owlCarousel({
@@ -104,16 +104,16 @@ jQuery(document).ready(function() {
     });
 
     // Enable isotop for Room Masonry
-    var masonryRoomContainer = jQuery(".room-container.room-masonry");
-    masonryRoomContainer.isotope({
-        transitionDuration: "0.7s"
-    });
+    // var masonryRoomContainer = jQuery(".room-container.room-masonry");
+    // masonryRoomContainer.isotope({
+    //     transitionDuration: "0.7s"
+    // });
 
     // Enable isotop for Testimonials
-    var mainTestimonialsBox = jQuery("#testimonials-container-box");
-    mainTestimonialsBox.isotope({
-        transitionDuration: "0.7s"
-    });
+    // var mainTestimonialsBox = jQuery("#testimonials-container-box");
+    // mainTestimonialsBox.isotope({
+    //     transitionDuration: "0.7s"
+    // });
 
     // Main Slider
     jQuery("#fullscreen-slider").owlCarousel({

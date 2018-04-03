@@ -5,6 +5,9 @@
   <title>宾馆后台管理</title>
   <link rel="stylesheet" type="text/css" href="css/common.css"/>
   <link rel="stylesheet" type="text/css" href="css/main.css"/>
+ <style>
+   .search-wrap{padding: 15px 0 0;color:gray;text-align:center;font-size:26px;border:none;}
+ </style>
 </head>
 <body>
   <div class="topbar-wrap white">
@@ -78,77 +81,93 @@
     <!--/sidebar-->
     <div class="main-wrap">
       <div class="crumb-wrap">
-        <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">入住查询</span></div>
+        <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">留言查看</span></div>
       </div>
       <div class="search-wrap">
-        <div class="search-content">
-          <form action="admin_queryo.php" method="post">
-            <table class="search-tab">
-              <tr>
-                <th width="120">查询条件</th>
-                <td>
-                  <select name="search-type" id="">
-                    <option value="roomid" selected >房间号</option>
-                    <option value="cardid">证件号</option>
-                    <option value="linkman">姓名</option>
-                    <option value="phone">联系电话</option>
-                  </select>
-                </td>
-                <th width="70">关键字</th>
-                <td><input class="common-text" placeholder="请输入相应关键字" name="keywords" value="" id="" type="text"></td>
-                <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
-              </tr>
-            </table>
-          </form>
-        </div>
+        留言信息显示
       </div>
       <div class="result-wrap">
         <div class="result-content">
           <table class="result-tab" width="100%">
             <tr>
-              <th class="tc">订单流水</th>
-              <th class="tc">房间号</th>
-              <th class="tc">证件号</th>
-              <th class="tc">入住时间</th>
-              <th class="tc">离开时间</th>
-              <th class="tc">房间类型</th>
-              <th class="tc">联系人</th>
-              <th class="tc">联系电话</th>
-              <th class="tc">网上预定</th>
-              <th class="tc">完成交易</th>
-              <th class="tc">房间价格</th>
+              <th class="tc">序号</th>
+              <th class="tc">主题</th>
+              <th class="tc">名字</th>
+              <th class="tc">邮箱</th>
+              <th class="tc">手机</th>
+              <th class="tc">留言内容</th>
+              <th class="tc">操&emsp;&emsp;作</th>
             </tr>
             <?php
               require("../dbconnect.php");
-              
-              $sql = "select a.orderid,a.roomid,a.cardid,a.entertime,a.leavetime,b.typename,a.linkman,a.phone,a.ostatus,a.oremarks,b.price from orders a,roomtype b where a.typeid=b.typeid and a.".@$_POST["search-type"]." like ('%".@$_POST["keywords"]."%')";
+              $pagesize = 10;
+              $sql = "select * from message";
               $rs=mysqli_query($db_link,$sql);
               if(!$rs)
               {
-                  echo "无满足条件的记录，请查询！";
+                  echo "无留言信息！";
                   exit;
-              }else{
-                while($rows=mysqli_fetch_assoc($rs))
-              {?>                            
+              }
+              $recordcount=mysqli_num_rows($rs);
+              $pagecount=($recordcount-1)/$pagesize+1;
+              $pagecount=(int)$pagecount;
+              $pageno=@$_GET["pageno"];
+              if($pageno=="")
+              {
+                  $pageno=1;
+              }
+              if($pageno>$pagecount)
+              {
+                  $pageno=$pagecount;
+              }
+              $startno=($pageno-1)*$pagesize;
+              $sql="select * from message order by ms_id asc limit $startno,$pagesize";
+           
+              $rs=mysqli_query($db_link,$sql);
+              if(!$rs)
+              {
+                  echo "无留言信息";
+                  exit;
+              }
+              while($rows=mysqli_fetch_assoc($rs))
+              {  ?>
                 <tr>
-                <td class='tc'><?php echo $rows["orderid"] ?></td>
-                <td class='tc'><?php echo $rows["roomid"] ?></td>
-                <td class='tc'><?php echo $rows["cardid"] ?></td>
-                <td class='tc'><?php echo $rows["entertime"] ?></td>
-                <td class='tc'><?php echo $rows["leavetime"] ?></td>
-                <td class='tc'><?php echo $rows["typename"] ?></td>
-                <td class='tc'><?php echo $rows["linkman"] ?></td>
+                <td class='tc'><?php echo $rows["ms_id"] ?></td>
+                <td class='tc'><?php echo $rows["title"] ?></td>
+                <td class='tc'><?php echo $rows["name"] ?></td>
+                <td class='tc'><?php echo $rows["mailbox"] ?></td>
                 <td class='tc'><?php echo $rows["phone"] ?></td>
-                <td class='tc'><?php echo $rows["ostatus"] ?></td>
-                <td class='tc'><?php echo $rows["oremarks"] ?></td>
-                <td class='tc'><?php echo $rows["price"] ?></td>
-
-                              
+                <td class='tc'><?php echo $rows["content"] ?></td>
+                
+                <td class='tc'>
+                <a href='delete.php?msid=<?php echo $rows["ms_id"] ?>'  class='link-update'>删除</a>
+                </td>
                 </tr>
             <?php } ?>
-           <?php } ?>
           </table>
+          <div class="list-page">
+      <?php
+        if($pageno==1)
+        {
+          if($recordcount>$pagesize){
+            echo "首页 | 上一页 | <a href='?pageno=".($pageno+1)."'>下一页</a> | <a href='?pageno=".$pagecount."'>末页</a>";
+          }else{
+            echo "首页 | 上一页 | 下一页 | 末页";
+          }
           
+        }
+        else if($pageno==$pagecount)
+        {
+          echo "<a href='?pageno=1'>首页</a> | <a href='?pageno=".($pageno-1)."'>上一页</a> | 下一页 | 末页";
+        }
+        else
+        {
+          echo "<a href='?pageno=1'>首页</a> | <a href='?pageno=".($pageno-1)."'>上一页</a> | <a href='?pageno=".($pageno+1)."'>下一页</a> | <a href='?pageno=".$pagecount."'>末页</a>";
+        }
+        
+        echo "&nbsp;&nbsp;页次：".$pageno."/".$pagecount."页&nbsp;共有".$recordcount."条信息";
+      ?>
+  </div>
         </div>
       </div>
     </div>

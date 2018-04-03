@@ -42,6 +42,11 @@ $("#main-menu #nav_35").addClass("active");
         margin-bottom: 50px;
     }
 }
+.location{
+        color:#C5A46D;
+        font-weight: bold;
+        text-align: center;
+    }
 </style>
 <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
 </head>
@@ -73,7 +78,22 @@ require("head.html");
 找到属于自己的位置，走自己的道路，人生，越努力越幸运！<br />
 					
 </div>
-
+<hr>
+<div id="contact-wrap">
+<h3 class="msg-title location">给我们留言</h3>
+<form class="add-msg-form" method="post" action="insert.php" name="msgform" id="contact-form">
+<div class="row">
+<div class="cf-column col-md-6"><input required name="title" id="subject" type="text" placeholder="主题" validate="minlength:2, maxlength:50, required:true"></div>
+<div class="cf-column col-md-6"><input required name="name" id="username" type="text" placeholder="名字" validate="minlength:2, maxlength:50, required:true"></div>
+<div class="cf-column col-md-6"><input required name="mailbox" id="mail" type="text" placeholder="邮箱" validate="maxlength:40, required:true, email:true"></div>
+<div class="cf-column col-md-6"><input required name="phone" id="telephone" type="text" placeholder="电话/手机" validate="minlength:6,maxlength:40, required:true"></div>
+<div class="cf-column col-md-12 cf-tarea"><textarea required name="content" id="comment" placeholder="留言内容" validate="minlength:2, maxlength:200, required:true"></textarea></div>
+<div class="cf-column col-md-12 submit-column">
+<input type="hidden" name="action" value="message">
+<button type="submit" id="submit-btn" class="submit-button">立即提交</button></div>
+</div>
+</form>
+</div>
 </div>
 
 
@@ -82,6 +102,8 @@ require("head.html");
 
 </div>
 </div>
+<hr>
+<h3 class='location'>位置信息</h3>
 <div id="dituContent"></div>
 </div>
 <div class="for-bottom-padding"></div>
@@ -91,6 +113,9 @@ require("footer.html");
 ?>
 
 </div>
+<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/helper.js"></script>
 <script type="text/javascript" src="js/template.js"></script>
 <script type="text/javascript">
     //创建和初始化地图函数：
