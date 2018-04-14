@@ -5,7 +5,6 @@
   <title>宾馆后台管理</title>
   <link rel="stylesheet" type="text/css" href="css/common.css"/>
   <link rel="stylesheet" type="text/css" href="css/main.css"/>
-
 </head>
 <body>
   <div class="topbar-wrap white">
@@ -25,57 +24,9 @@
     </div>
   </div>
   <div class="container clearfix">
-    <div class="sidebar-wrap">
-      <div class="sidebar-title">
-        <h1>管理菜单</h1>
-      </div>
-      <div class="sidebar-content">
-        <ul class="sidebar-list">
-          <li>
-            <a href="#">入住管理</a>
-            <ul class="sub-menu">
-              <li><a href="admin_addn.php"><i class="icon-font">&#xe960;</i>大堂入住</a></li>
-              <li><a href="admin_addo.php"><i class="icon-font">&#xe960;</i>订单入住</a></li>
-              <li><a href="admin_queryo.php"><i class="icon-font">&#xe986;</i>入住查询</a></li>
-              <li><a href="admin_counto.php"><i class="icon-font">&#xe99a;</i>入住统计</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">退房管理</a>
-            <ul class="sub-menu">
-              <li><a href="admin_checkout.php"><i class="icon-font">&#xe994;</i>退房清算</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">房间管理</a>
-            <ul class="sub-menu">
-              <li><a href="admin_addh.php"><i class="icon-font">&#xe995;</i>新增房间</a></li>
-              <li><a href="admin_roommgr.php"><i class="icon-font">&#xe994;</i>房间管理</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">房类管理</a>
-            <ul class="sub-menu">
-              <li><a href="admin_addt.php"><i class="icon-font">&#xe995;</i>新增房类</a></li>
-              <li><a href="admin_rtypemgr.php"><i class="icon-font">&#xe994;</i>房类管理</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">留言管理</a>
-            <ul class="sub-menu">
-              <li><a href="admin_message.php"><i class="icon-font">&#xe986;</i>留言查看</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">系统管理</a>
-            <ul class="sub-menu">
-              <li><a href="admin_chpwd.php"><i class="icon-font">&#xe991;</i>密码修改</a></li>
-              <li><a href="admin_logout.php"><i class="icon-font">&#xe9b6;</i>退出系统</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <?php
+    require("leftArea.html");
+    ?>
     <!--/sidebar-->
     <div class="main-wrap">
       <div class="crumb-wrap">

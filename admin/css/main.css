@@ -5,8 +5,8 @@
 .sidebar-content{padding-top: 5px;}
 .sidebar-list li{border:1px solid #e5e5e5;border-width:1px 0;}
 .sidebar-list li .icon-font{margin-right: 5px;color: #888;font-size: 14px;}
-.sidebar-list li a{padding: 0 16px 0 20px;display: block;height: 38px;line-height: 38px;color: #333;}
-.sidebar-list li a:hover{background: #fff;color: #1963AA;}
+.sidebar-list li a{padding: 0 16px 0 20px;display: block;height: 38px;line-height: 38px;color:rgba(0,0,0,.7);}
+.sidebar-list li a:hover{color:#000;}
 .sub-menu{border-top: 1px solid #e5e5e5;background: #fff;}
 .sub-menu li{padding-left: 21px;}
 .sub-menu li.on{background: #1963AA;}
@@ -57,3 +57,11 @@
 .res-lab{color: #909090;}
 .res-info{font-size: 15px;}
 .sort-input{width: 25px;text-align: center;}
+a.actives{
+	background: url('../img/d.png') no-repeat 160px center;
+	background-size: 10px 10px;
+}
+a.active{
+	background: url('../img/r.png') no-repeat 160px center;
+	background-size: 10px 10px;
+}
