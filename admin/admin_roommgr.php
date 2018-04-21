@@ -11,14 +11,24 @@
     <div class="topbar-inner clearfix">
       <div class="topbar-logo-wrap clearfix">
         <ul class="navbar-list clearfix">
-          <li><a class="on" href="admin_index.php">网站后台</a></li>
-          <li><a href="../index.php" target="_blank">网站首页</a></li>
+          <li><a class="on" href="admin_index.php"><i class="icon-font">&#xe622;</i> 网站后台</a></li>
+          <li><a href="../index.php" target="_blank"><i class="icon-font">&#xe681;</i> 网站首页</a></li>
         </ul>
       </div>
       <div class="top-info-wrap">
         <ul class="top-info-list clearfix">
-          <li>登录用户：<?php session_start(); echo $_SESSION["aname"]; ?></li>
-          <li><a href="admin_logout.php"><i class="icon-font">&#xe9b6;</i>退出</a></li>
+          <li><i class="icon-font">&#xe607;</i> 登录用户：
+            <?php 
+            session_start(); 
+            if($_SESSION["aname"]){
+              echo $_SESSION["aname"]; 
+            }else{
+              header("location:index.php");
+              exit;
+            } 
+            ?>
+            </li>
+          <li><a href="admin_logout.php"><i class="icon-font">&#xe638;</i> 退出</a></li>
         </ul>
       </div>
     </div>
@@ -42,12 +52,12 @@
                   <select name="search-type" id="">
                     <option value="roomid" selected>房间编号</option>
                     <option value="typeid">房间类型</option>
-                    <option value="status">房间状态</option>
+                    <option value="status">房间入住状态</option>
                   </select>
                 </td>
                 <th width="70">关键字</th>
                 <td><input class="common-text" placeholder="请输入查询条件" name="keywords" value="" id="" type="text"></td>
-                <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
+                <td><input  name="sub" value="查询" type="submit"></td>
               </tr>
             </table>
           </form>
@@ -59,17 +69,23 @@
             <tr>
               <th class="tc">房间编号</th>
               <th class="tc">房间类型</th>
-              <th class="tc">房间状态</th>
+              <th class="tc">房间入住状态</th>
               <th class="tc">房间描述</th>
+              <th class="tc">房间图片</th>
               <th class="tc">操&emsp;&emsp;作</th>
             </tr>
             <?php
               require("../dbconnect.php");
-              $sql = "select a.roomid,b.typename,a.status,a.remarks from room a,roomtype b where a.typeid=b.typeid and a.".@$_POST["search-type"]." like ('%".@$_POST["keywords"]."%')";
+              $sql = "select a.roomid,a.typeid,b.typename,a.status,a.remarks,a.pic from room a,roomtype b where a.typeid=b.typeid and a.".@$_POST["search-type"]." like ('%".@$_POST["keywords"]."%')";
               $rs=mysqli_query($db_link,$sql);
-              if(!$rs)
+              if($rs){
+              $s=mysqli_num_rows($rs);
+              }else{
+                $s=0;
+              }
+              if(!$s)
               {
-                  echo "无满足条件的记录！";
+                  echo "无满足条件的记录，请继续查询！";
                   exit;
               }
               
@@ -80,8 +96,9 @@
                 <td class='tc'><?php echo $rows["typename"] ?></td>
                 <td class='tc'><?php echo $rows["status"] ?></td>
                 <td class='tc'><?php echo $rows["remarks"] ?></td>
+                <td class='tc'><img height='auto' width="60px" src='../images/<?php echo $rows["pic"] ?>'></td>
                 <td class='tc'>
-                  <a href='admin_roommod.php?mid=<?php echo $rows["roomid"] ?>'  class='link-update'>修改</a>&nbsp;&nbsp;<a href='delete.php?mid=<?php echo $rows["roomid"] ?>' class='link-del''>删除</a>
+                  <a href='admin_roommod.php?mid=<?php echo $rows["roomid"] ?>'  class='link-update'>修改</a>&nbsp;&nbsp;<a href='delete.php?mid=<?php echo $rows["roomid"] ?>&typeid=<?php echo $rows["typeid"] ?>&status=<?php echo $rows["status"] ?>' class='link-del''>删除</a>
                 </td>
                 
               </tr>

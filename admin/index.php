@@ -11,11 +11,11 @@
   <h1>宾馆管理系统后台登录</h1>
   <form method="post" action="admin_login.php" id="form">
     <div class="name">
-      <label for="user">管理员账号：</label>
+      <label for="user">账&emsp;号：</label>
       <input type="text" placeholder="请输入账号" name="username" id="user" autocomplete="off" />
     </div>
     <div class="password">
-      <label for="pwd">密  码：</label>
+      <label for="pwd">密&emsp;码：</label>
       <input type="password" placeholder="请输入密码" name="pwd"  id="pwd" autocomplete="off" />
     </div>
     <div class="code">

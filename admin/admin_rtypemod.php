@@ -12,14 +12,24 @@
     <div class="topbar-inner clearfix">
       <div class="topbar-logo-wrap clearfix">
         <ul class="navbar-list clearfix">
-          <li><a class="on" href="admin_index.php">网站后台</a></li>
-          <li><a href="../index.php" target="_blank">网站首页</a></li>
+          <li><a class="on" href="admin_index.php"><i class="icon-font">&#xe622;</i> 网站后台</a></li>
+          <li><a href="../index.php" target="_blank"><i class="icon-font">&#xe681;</i> 网站首页</a></li>
         </ul>
       </div>
       <div class="top-info-wrap">
         <ul class="top-info-list clearfix">
-          <li>登录用户：<?php session_start(); echo $_SESSION["aname"]; ?></li>
-          <li><a href="admin_logout.php"><i class="icon-font">&#xe9b6;</i>退出</a></li>
+          <li><i class="icon-font">&#xe607;</i> 登录用户：
+            <?php 
+            session_start(); 
+            if($_SESSION["aname"]){
+              echo $_SESSION["aname"]; 
+            }else{
+              header("location:index.php");
+              exit;
+            } 
+            ?>
+            </li>
+          <li><a href="admin_logout.php"><i class="icon-font">&#xe638;</i> 退出</a></li>
         </ul>
       </div>
     </div>
@@ -31,7 +41,7 @@
     <!--/sidebar-->
     <?php
       require("../dbconnect.php");
-      $sql="select * from roomtype where typeid=".$_GET["rid"];
+      $sql="select * from roomtype where typeid='".$_GET["rid"]."'";
       $arr=mysqli_query($db_link,$sql);
       $rows=mysqli_fetch_row($arr);
     ?>
@@ -41,57 +51,49 @@
       </div>
       <div class="result-wrap">
         <form id="myform" name="myform" method="post" action="update.php?mtid=<?php echo $rows[0] ?>">
-          <table width="100%" height="173" border="0" align="center" cellpadding="2" cellspacing="1" class="result-tab">
-            <tr>
-              <td width="%15" align="right" class="td_bg">类型名称：</td>
-              <td width="%85" class="td_bg"> <input name="typename" type="text" id="typename" value="<?php echo $rows[1] ?>" size="30" maxlength="50" /></td>
-            </tr>
-            <tr>
-              <td align="right" class="td_bg">房间面积：</td>
-              <td class="td_bg"> <input name="area" type="text" id="area" value="<?php echo $rows[2] ?>" size="30" maxlength="50" /></td>
-            </tr>
-
-            <tr>
-              <td align="right" class="td_bg">网络：</td>
-              <td class="td_bg">
-                <select name="hasNet">
-                  <option value="<?php echo $rows[3] ?>" selected><?php echo $rows[3] ?></option>
-                  <option value="有">有</option>
-                  <option value="无">无</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td align="right" class="td_bg">电视：</td>
-              <td class="td_bg">
-                <select name="hasTV">
-                  <option value="<?php echo $rows[4] ?>" selected><?php echo $rows[4] ?></option>
-                  <option value="有">有</option>
-                  <option value="无">无</option>
-                </select>
-              </td>
-            </tr>
-
-            <tr>
-              <td align="right" class="td_bg">价格：</td>
-              <td class="td_bg"><input name="price" type="text" id="price" value="<?php echo $rows[5] ?>" size="10" maxlength="15" />元</td>
-            </tr>
-            <tr>
-              <td align="right" class="td_bg">房间数量：</td>
-              <td class="td_bg"><input name="totalnum" type="text" id="totalnum" value="<?php echo $rows[6] ?>" size="10" maxlength="15" />间</td>
-            </tr>
-            <tr>
-              <td align="right" class="td_bg">剩余数量：</td>
-              <td class="td_bg"><input name="leftnum" type="text" id="leftnum" value="<?php echo $rows[7] ?>" size="10" maxlength="15" />间</td>
-            </tr>
-            <tr>
-              <td align="right" class="td_bg"><input type="reset" name="submit2" id="button2" value="重置" /></td>
-              <td class="td_bg">
-                <input type="hidden" name="action" value="modify">
-                <input type="submit" name="submit" id="button" value="提交" />
-              </td>
-            </tr>
-          </table>
+        <ul class="order">
+          <li>
+            <label for="typename">类型名称&emsp;</label>
+            <input name="typename" type="text" id="typename" value="<?php echo $rows[1] ?>" size="30" maxlength="50" />
+          </li>
+          <li>
+            <label for="area">房间面积&emsp;</label>
+            <input name="area" type="text" id="area" value="<?php echo $rows[2] ?>" size="30" maxlength="50" />
+          </li>
+          <li>
+            <label for="hasNet">网&emsp;&emsp;络&emsp;</label>
+            <select name="hasNet" id='hasNet'>
+              <option value="<?php echo $rows[3] ?>" selected><?php echo $rows[3] ?></option>
+              <option value="有">有</option>
+              <option value="无">无</option>
+            </select>
+          </li>
+          <li>
+            <label for="hasTv">电&emsp;&emsp;视&emsp;</label>
+            <select name="hasTV" id="hasTv">
+              <option value="<?php echo $rows[4] ?>" selected><?php echo $rows[4] ?></option>
+              <option value="有">有</option>
+              <option value="无">无</option>
+            </select>
+          </li>
+          <li>
+            <label for="price">价&emsp;&emsp;格&emsp;</label>
+            <input name="price" type="text" id="price" value="<?php echo $rows[5] ?>" size="10" maxlength="15" /> 元
+          </li>
+          <li>
+            <label for="totalnum">房间数量&emsp;</label>
+            <input name="totalnum" type="text" id="totalnum" value="<?php echo $rows[6] ?>" size="10" maxlength="15" /> 间
+          </li>
+          <li>
+            <label for="leftnum">剩余数量：</label>
+            <input name="leftnum" type="text" id="leftnum" value="<?php echo $rows[7] ?>" size="10" maxlength="15" /> 间
+          </li>
+          <li>
+            <input type="reset" class="reset" name="submit2" id="button2" value="重置" />
+            <input type="hidden" name="action" value="modify">
+            <input type="submit" name="submit" id="button" value="提交" />
+          </li>
+        </ul>
         </form>
       </div>
     </div>

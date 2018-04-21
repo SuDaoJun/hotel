@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -41,7 +41,7 @@
     <!--/sidebar-->
     <?php
       require("../dbconnect.php");
-      $sql="select a.roomid,b.typeid,b.typename,a.status,a.remarks,a.pic from room a,roomtype b where a.typeid=b.typeid and a.roomid='".$_GET["mid"]."'";
+      $sql="select * from news where id='".$_GET["pid"]."'";
       $arr=mysqli_query($db_link,$sql);
       $rows=mysqli_fetch_row($arr);
     ?>
@@ -50,57 +50,63 @@
         <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">房间管理</span></div>
       </div>
       <div class="result-wrap">
-        <form id="myform" name="myform" method="post" action="update.php?mrid=<?php echo $rows[0] ?>" enctype="multipart/form-data">
-        <ul class='order'>
+        <form id="myform" name="myform" method="post" action="update.php?pid=<?php echo $rows[0] ?>" enctype="multipart/form-data">
+        <ul class="order">
           <li>
-            <label for="roomid">房间编号&emsp;</label>
-            <input name="roomid" type="text" id="roomid" value="<?php echo $rows[0] ?>" size="4" maxlength="10" />
+            <label for="id">相册序号&emsp;</label>
+            <input name="id" type="text"  value="<?php echo $rows[0] ?>" size="4" maxlength="10" />
           </li>
           <li>
-            <label for="typeid">房间类型&emsp;</label>
-            <select name="typeid" id='typeid'>
-             <option value="typename" >
-              <?php echo $rows[2]  ?>
-              </option>
-            </select>
+            <label for="title">相册标题&emsp;</label>
+            <input name="title" id='title' type="text" value="<?php echo $rows[1] ?>" size="30" maxlength="30" />
           </li>
           <li>
-            <label for="status">房间状态&emsp;</label>
-            <select name="status" id='status'>
-              <option value="<?php echo $rows[3] ?>" >
-              <?php echo $rows[3] == '是'?'已入住':'未入住'  ?>
-              </option>
-            </select>
-          </li>
-          <li>
-            <label for="">房间图片&emsp;</label>
+            <label for="">相册小图&emsp;</label>
             <label for="file" class='fjtp'>上传图片</label>
-            <input name="file" accept="image/*" type="file" id="file"  /><input type="hidden" name='init' value='<?php echo $rows[5] ?>' ><span class="xxx"></span>图片预览&emsp;<img src='../images/<?php echo $rows[5] ?>' height="auto" width="120px" id='imgs'>
+            <input name="file" accept="image/*" type="file" id="file"  /><input type="hidden" name='init' value='<?php echo $rows[2] ?>' ><span class="xxx"></span>图片预览&emsp;<img src='../images/<?php echo $rows[2] ?>' height="auto" width="60px" id='img'>
+          </li>
+          <li>
+            <label for="">相册大图&emsp;</label>
+            <label for="files" class='fjtp'>上传图片</label>
+            <input name="files" accept="image/*" type="file" id="files"  /><input type="hidden" name='inits' value='<?php echo $rows[3] ?>' ><span class="xxxx"></span>图片预览&emsp;<img src='../images/<?php echo $rows[3] ?>' height="auto" width="60px" id='imgs'>
           </li>
           <script>
-            $("#file").change(function(){
+           $(function(){
+            $("#button").click(function() {
+              var file = $("#file").val();
+              var files = $("#files").val();
+              if((file && !files) || (!file && files)){
+                alert("请选择相应的相册大小图片");  
+                return false;
+              }              
+            })
+          })    
+          function preview(file,img,xxx){
+            file.change(function(){
               var reader = new FileReader();
               reader.onload = function(e){
-                $("#imgs").attr('src', e.target.result);
-                var str=$("#file").val();
+                img.attr('src', e.target.result);
+                var str=file.val();
                 var arrs=str.split('\\');
                 var names=arrs[arrs.length-1];
-                $(".xxx").html(names);
+                xxx.html(names);
               }
-              reader.readAsDataURL($("#file")[0].files[0]);
+              reader.readAsDataURL(file[0].files[0]);
             });
+           }
+          preview($("#file"),$("#img"),$(".xxx"));
+          preview($("#files"),$("#imgs"),$(".xxxx"));         
           </script>
           <li>
-            <label for="remarks">房间描述&emsp;</label>
-            <textarea id="remarks" placeholder="房间描述..." value='<?php echo $rows[4] ?>' name="remarks"><?php echo $rows[4] ?></textarea>
+            <label for="describes">相册描述&emsp;</label>
+            <textarea  placeholder="相册描述..." value='<?php echo $rows[4] ?>' id='describes' name="describes"><?php echo $rows[4] ?></textarea>
           </li>
           <li>
             <input type="reset" class="reset" name="submit2" id="button2" value="重置" />
-            <input type="hidden" name="action" value="roomchg">
+            <input type="hidden" name="action" value="photochg">
             <input type="submit" name="submit" id="button" value="提交" />
-          </li>      
+          </li>
         </ul>
-          
         </form>
       </div>
     </div>

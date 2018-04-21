@@ -5,27 +5,34 @@
   <title>宾馆后台管理</title>
   <link rel="stylesheet" type="text/css" href="css/common.css"/>
   <link rel="stylesheet" type="text/css" href="css/main.css"/>
-<style>
-   .search-wrap{padding: 15px 0 0;color:gray;text-align:center;font-size:26px;border:none;}
- </style>
 </head>
 <body>
   <div class="topbar-wrap white">
-    <div class="topbar-inner clearfix">
-      <div class="topbar-logo-wrap clearfix">
-        <ul class="navbar-list clearfix">
-          <li><a class="on" href="admin_index.php">网站后台</a></li>
-          <li><a href="../index.php" target="_blank">网站首页</a></li>
-        </ul>
-      </div>
-      <div class="top-info-wrap">
-        <ul class="top-info-list clearfix">
-          <li>登录用户：<?php session_start(); echo $_SESSION["aname"]; ?></li>
-          <li><a href="admin_logout.php"><i class="icon-font">&#xe9b6;</i>退出</a></li>
-        </ul>
+      <div class="topbar-inner clearfix">
+        <div class="topbar-logo-wrap clearfix">
+          <ul class="navbar-list clearfix">
+            <li><a class="on" href="admin_index.php"><i class="icon-font">&#xe622;</i> 网站后台</a></li>
+            <li><a href="../index.php" target="_blank"><i class="icon-font">&#xe681;</i> 网站首页</a></li>
+          </ul>
+        </div>
+        <div class="top-info-wrap">
+          <ul class="top-info-list clearfix">
+            <li><i class="icon-font">&#xe607;</i> 登录用户：
+            <?php 
+            session_start(); 
+            if($_SESSION["aname"]){
+              echo $_SESSION["aname"]; 
+            }else{
+              header("location:index.php");
+              exit;
+            } 
+            ?>
+            </li>
+            <li><a href="admin_logout.php"><i class="icon-font">&#xe638;</i> 退出</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
   <div class="container clearfix">
     <?php
     require("leftArea.html");
@@ -58,14 +65,14 @@
             <?php
               require("../dbconnect.php");
               $pagesize = 10;
-              $sql = "select a.orderid,a.roomid,a.cardid,a.entertime,a.leavetime,b.typename,a.linkman,a.phone,a.ostatus,a.oremarks,b.price from orders a, roomtype b where a.typeid=b.typeid and a.ostatus='是' and a.oremarks='否'";
+              $sql = "select a.orderid,a.roomid,a.cardid,a.entertime,a.leavetime,b.typeid,b.typename,a.linkman,a.phone,a.ostatus,a.oremarks,b.price from orders a, roomtype b where a.typeid=b.typeid and a.ostatus='是' and a.oremarks='否'";
               $rs=mysqli_query($db_link,$sql);
               if(!$rs)
               {
                   echo "无网上订单";
                   exit;
               }
-               $recordcount=mysqli_num_rows($rs);
+              $recordcount=mysqli_num_rows($rs);
               $pagecount=($recordcount-1)/$pagesize+1;
               $pagecount=(int)$pagecount;
               $pageno=@$_GET["pageno"];
@@ -78,7 +85,7 @@
                   $pageno=$pagecount;
               }
               $startno=($pageno-1)*$pagesize;
-              $sql="select a.orderid,a.roomid,a.cardid,a.entertime,a.leavetime,b.typename,a.linkman,a.phone,a.ostatus,a.oremarks,b.price from orders a, roomtype b where a.typeid=b.typeid and a.ostatus='是' and a.oremarks='否' order by a.roomid asc limit $startno,$pagesize";
+              $sql="select a.orderid,a.roomid,a.cardid,a.entertime,a.leavetime,b.typeid,b.typename,a.linkman,a.phone,a.ostatus,a.oremarks,b.price from orders a, roomtype b where a.typeid=b.typeid and a.ostatus='是' and a.oremarks='否' order by a.roomid asc limit $startno,$pagesize";
            
               $rs=mysqli_query($db_link,$sql);
               if(!$rs)
@@ -102,7 +109,8 @@
                 <td class='tc'><?php echo $rows["price"] ?></td>
 
                 <td class='tc'>
-                <a href='update.php?olrid=<?php echo $rows["roomid"] ?>'  class='link-update'>办理入住</a>
+                <a href='delete.php?cardid=<?php echo $rows["cardid"] ?>&typeid=<?php echo $rows["typeid"] ?>'  class='link-update'>取消</a>
+                <a href='update.php?olrid=<?php echo $rows["roomid"] ?>'  class='link-update'>确认</a>
                 </td>
                               
                 </tr>

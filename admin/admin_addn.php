@@ -5,23 +5,30 @@
   <title>宾馆后台管理</title>
   <link rel="stylesheet" type="text/css" href="css/common.css"/>
   <link rel="stylesheet" type="text/css" href="css/main.css"/>
- <style>
-   .search-wrap{padding: 15px 0 0;color:gray;text-align:center;font-size:26px;border:none;}
- </style>
 </head>
 <body>
   <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
       <div class="topbar-logo-wrap clearfix">
         <ul class="navbar-list clearfix">
-          <li><a class="on" href="admin_index.php">网站后台</a></li>
-          <li><a href="../index.php" target="_blank">网站首页</a></li>
+          <li><a class="on" href="admin_index.php"><i class="icon-font">&#xe622;</i> 网站后台</a></li>
+          <li><a href="../index.php" target="_blank"><i class="icon-font">&#xe681;</i> 网站首页</a></li>
         </ul>
       </div>
       <div class="top-info-wrap">
         <ul class="top-info-list clearfix">
-          <li>登录用户：<?php session_start(); echo $_SESSION["aname"]; ?></li>
-          <li><a href="admin_logout.php"><i class="icon-font">&#xe9b6;</i>退出</a></li>
+          <li><i class="icon-font">&#xe607;</i> 登录用户：
+          <?php 
+          session_start(); 
+          if($_SESSION["aname"]){
+            echo $_SESSION["aname"]; 
+          }else{
+            header("location:index.php");
+            exit;
+          } 
+          ?>
+          </li>
+          <li><a href="admin_logout.php"><i class="icon-font">&#xe638;</i> 退出</a></li>
         </ul>
       </div>
     </div>

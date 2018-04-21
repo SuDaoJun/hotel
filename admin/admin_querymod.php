@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -40,7 +40,7 @@
     <!--/sidebar-->
     <?php
       require("../dbconnect.php");
-      $sql="select a.roomid,b.typeid,b.typename,b.price from room a,roomtype b where a.typeid=b.typeid and a.roomid='".$_GET["orid"]."'";
+      $sql="select a.orderid,a.roomid,a.cardid,a.entertime,a.leavetime,b.typename,a.linkman,a.phone,a.ostatus,a.oremarks,b.price,b.typeid from orders a,roomtype b where a.typeid=b.typeid and a.orderid='".$_GET["orderid"]."'";
       $arr=mysqli_query($db_link,$sql);
       $rows=mysqli_fetch_row($arr);
     ?>
@@ -49,52 +49,45 @@
         <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">大堂入住</span></div>
       </div>
       <div class="result-wrap">
-        <form id="myform" name="myform" method="post" action="insert.php">
+        <form id="myform" name="myform" method="post" action="update.php">
         <ul class='order'>
           <li>
-            <label for="roomid">房间编号&emsp;</label>
-            <input name="roomid" type="text" class='jz' readonly id="roomid" value="<?php echo $_GET["orid"] ?>" size="15" maxlength="20" />
+            <label for="orderid">订单流水&emsp;</label>
+            <input name="orderid" type="text" required   id="orderid" value="<?php echo $rows[0] ?>" size="15" maxlength="20" />
           </li>
           <li>
-            <label for="typeid">类型编号&emsp;</label>
-            <input class='jz' name="typeid" type="text" id="typeid" readonly value="<?php echo $rows[1] ?>" size="15" maxlength="20" />
+            <label for="roomid">房间号&emsp;</label>
+            <input  name="roomid" required type="text" id="roomid"  value="<?php echo $rows[1] ?>" size="15" maxlength="20" />
           </li>
           <li>
-            <label for="typename">类型名称&emsp;</label>
-            <input class='jz' name="typename" type="text" id="typename" readonly value="<?php echo $rows[2] ?>" size="15" maxlength="20" />
+            <label for="cardid">证件号&emsp;</label>
+            <input  name="cardid" required type="text" id="cardid"  value="<?php echo $rows[2] ?>" size="15" maxlength="20" />
           </li>
           <li>
-            <label for="price">房间价格&emsp;</label>
-            <input class='jz' name="price" type="text" id="price" readonly value="<?php echo $rows[3].'元/天' ?>" size="15" maxlength="20" />
-          </li>
-          <li>
-            <label for="cname">顾客姓名&emsp;</label>
-            <input name="name" type="text" required placeholder="请输入客户姓名" id="cname" size="15" maxlength="30" />
-          </li>
-          <li>
-            <label for="cardid">证件号码&emsp;</label>
-            <input placeholder="请输入身份证号码" required name="card" type="text" id="cardid" size="30" maxlength="50" />
-          </li>
-          <li>
-            <label for="entertime">入住时间&emsp;</label>
-            <input name="checkin" type="text" id="entertime"  value=<?php echo date("Y-m-d"); ?> size="30" maxlength="50" />
-          </li>
-          <li>
-            <label for="leavetime">离开时间&emsp;</label>
-            <input name="checkout" type="text" id="leavetime" required placeholder="选择离开日期" size="30" maxlength="50" />
+            <label for="linkman">联系人&emsp;</label>
+            <input  name="linkman" required type="text" id="linkman"  value="<?php echo $rows[6] ?>" size="15" maxlength="20" />
           </li>
           <li>
             <label for="phone">联系电话&emsp;</label>
-            <input name="phone" type="text" id="phone" required placeholder="请输入联系电话" size="30" maxlength="50" />
+            <input name="phone" type="text" required value='<?php echo $rows[7] ?>'  id="phone" size="15" maxlength="30" />
           </li>
           <li>
-            <label for="message-field">订单备注&emsp;</label>
-            <textarea id="message-field" placeholder="备注信息..." name="content"></textarea>
+            <label for="price">房间价格&emsp;</label>
+            <input  required name="price" type="text" id="price" size="30" value="<?php echo $rows[10] ?>" maxlength="50" />
+          </li>
+          <li>
+            <label for="entertime">入住时间&emsp;</label>
+            <input name="entertime" type="text" id="entertime"  value=<?php echo $rows[3] ?> size="30" maxlength="50" />
+          </li>
+          <li>
+            <label for="leavetime">离开时间&emsp;</label>
+            <input name="leavetime" type="text" id="leavetime" required value='<?php echo $rows[4] ?>'  size="30" maxlength="50" />
           </li>
           <li>
             <input type="reset" class='reset' name="submit2" id="button2" value="重置" />
-            <input type="hidden" name="action" value="inserto">
-            <input type="submit" name="submit" id="button" value="确认入住" />
+            <input type="hidden" name="typeid" value="<?php echo $rows[11] ?>">
+            <input type="hidden" name="action" value="dmod">
+            <input type="submit" name="submit" id="button" value="确定" />
           </li>
 
         </ul>

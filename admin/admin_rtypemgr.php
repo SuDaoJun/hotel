@@ -11,14 +11,24 @@
     <div class="topbar-inner clearfix">
       <div class="topbar-logo-wrap clearfix">
         <ul class="navbar-list clearfix">
-          <li><a class="on" href="admin_index.php">网站后台</a></li>
-          <li><a href="../index.php" target="_blank">网站首页</a></li>
+          <li><a class="on" href="admin_index.php"><i class="icon-font">&#xe622;</i> 网站后台</a></li>
+          <li><a href="../index.php" target="_blank"><i class="icon-font">&#xe681;</i> 网站首页</a></li>
         </ul>
       </div>
       <div class="top-info-wrap">
         <ul class="top-info-list clearfix">
-          <li>登录用户：<?php session_start(); echo $_SESSION["aname"]; ?></li>
-          <li><a href="admin_logout.php"><i class="icon-font">&#xe9b6;</i>退出</a></li>
+          <li><i class="icon-font">&#xe607;</i> 登录用户：
+            <?php 
+            session_start(); 
+            if($_SESSION["aname"]){
+              echo $_SESSION["aname"]; 
+            }else{
+              header("location:index.php");
+              exit;
+            } 
+            ?>
+            </li>
+          <li><a href="admin_logout.php"><i class="icon-font">&#xe638;</i> 退出</a></li>
         </ul>
       </div>
     </div>
@@ -47,7 +57,7 @@
                 </td>
                 <th width="70">关键字</th>
                 <td><input class="common-text" placeholder="请输入查询条件" name="keywords" value="" id="" type="text"></td>
-                <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
+                <td><input  name="sub" value="查询" type="submit"></td>
               </tr>
             </table>
           </form>
@@ -71,9 +81,14 @@
               require("../dbconnect.php");
               $sql = "select * from roomtype where ".@$_POST["search-type"]." like ('%".@$_POST["keywords"]."%')";
               $rs=mysqli_query($db_link,$sql);
-              if(!$rs)
+              if($rs){
+              $s=mysqli_num_rows($rs);
+              }else{
+                $s=0;
+              }
+              if(!$s)
               {
-                  echo "无满足条件的记录，请查询！";
+                  echo "无满足条件的记录，请继续查询！";
                   exit;
               }
               while($rows=mysqli_fetch_assoc($rs))
