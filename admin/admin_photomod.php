@@ -47,7 +47,7 @@
     ?>
     <div class="main-wrap">
       <div class="crumb-wrap">
-        <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">房间管理</span></div>
+        <div class="crumb-list"><i class="icon-font"></i><a href="admin_photomgr.php">相册管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">相册修改</span></div>
       </div>
       <div class="result-wrap">
         <form id="myform" name="myform" method="post" action="update.php?pid=<?php echo $rows[0] ?>" enctype="multipart/form-data">

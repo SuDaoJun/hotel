@@ -20,7 +20,7 @@
     </div>
     <div class="code">
       <label for="codes">验证码：</label>
-      <input type="text" name="" maxlength="4" id="codes" />
+      <input type="text" placeholder="请输入验证码" name="" maxlength="4" id="codes" />
       <input type = "button" id="code"/>        
     </div><br>
     <div class="login">

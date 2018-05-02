@@ -42,9 +42,7 @@
       <div class="crumb-wrap">
         <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">大堂入住</span></div>
       </div>
-      <div class="search-wrap">
-        空闲房间显示
-      </div>
+      <div class="search-wrap">空余房间显示</div>
       <div class="result-wrap">
         <div class="result-content">
           <table class="result-tab" width="100%">

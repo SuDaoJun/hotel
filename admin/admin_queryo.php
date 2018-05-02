@@ -72,19 +72,20 @@
               <th class="tc">房间号</th>
               <th class="tc">证件号</th>
               <th class="tc">入住时间</th>
-              <th class="tc">离开时间</th>
+              <th class="tc">住宿天数</th>
               <th class="tc">房间类型</th>
-              <th class="tc">联系人</th>
+              <th class="tc">顾客姓名</th>
               <th class="tc">联系电话</th>
+              <th class="tc">备注信息</th>
               <th class="tc">网上预定</th>
               <th class="tc">完成交易</th>
-              <th class="tc">房间价格</th>
+              <th class="tc">消费金额</th>
               <th class="tc">操&emsp;&emsp;作</th>
             </tr>
             <?php
               require("../dbconnect.php");
               
-              $sql = "select a.orderid,a.roomid,a.cardid,a.entertime,a.leavetime,b.typeid,b.typename,a.linkman,a.phone,a.ostatus,a.oremarks,b.price from orders a,roomtype b where a.typeid=b.typeid and a.".@$_POST["search-type"]." like ('%".@$_POST["keywords"]."%')";
+              $sql = "select a.orderid,a.roomid,a.cardid,a.entertime,a.days,b.typeid,b.typename,a.linkman,a.phone,a.messages,a.monetary,a.ostatus,a.oremarks,b.price from orders a,roomtype b where a.typeid=b.typeid and a.".@$_POST["search-type"]." like ('%".@$_POST["keywords"]."%')";
               $rs=mysqli_query($db_link,$sql);
               if($rs){
               $s=mysqli_num_rows($rs);
@@ -97,19 +98,21 @@
                   exit;
               }else{
                 while($rows=mysqli_fetch_assoc($rs))
-              {?>                            
+              {
+                ?>                            
                 <tr>
                 <td class='tc'><?php echo $rows["orderid"] ?></td>
                 <td class='tc'><?php echo $rows["roomid"] ?></td>
                 <td class='tc'><?php echo $rows["cardid"] ?></td>
                 <td class='tc'><?php echo $rows["entertime"] ?></td>
-                <td class='tc'><?php echo $rows["leavetime"] ?></td>
+                <td class='tc'><?php echo $rows["days"] ?></td>
                 <td class='tc'><?php echo $rows["typename"] ?></td>
                 <td class='tc'><?php echo $rows["linkman"] ?></td>
                 <td class='tc'><?php echo $rows["phone"] ?></td>
+                <td class='tc'><?php echo $rows["messages"] ?></td>
                 <td class='tc'><?php echo $rows["ostatus"] ?></td>
                 <td class='tc'><?php echo $rows["oremarks"] ?></td>
-                <td class='tc'><?php echo $rows["price"] ?></td>
+                <td class='tc'><?php echo $rows["monetary"] ?></td>
                 <td class='tc'>
                   <a href='admin_querymod.php?orderid=<?php echo $rows["orderid"] ?>'  class='link-update'>修改</a>
                 </td>                 

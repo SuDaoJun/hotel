@@ -2,14 +2,10 @@
   require("../dbconnect.php");
   //大堂入住
   if($_POST["action"]=="inserto")
-  {
-    //在customer表中插入一条记录
-   $sql1 = "insert into customer (cardid,phone,cname,message) values('".$_POST["card"]."','".$_POST["phone"]."','".$_POST["name"]."','".@$_POST["content"]."')";
-    mysqli_query($db_link,$sql1) or die ("在customer表中插入记录失败");
-    
+  {  
     //在order表中插入一条记录
-    $sql2 = "insert into orders (orderid,roomid,cardid,entertime,leavetime,typeid,linkman,phone,ostatus,oremarks) values('".date('his')."','".$_POST["roomid"]."','".$_POST["card"]."','".$_POST["checkin"]."','".$_POST["checkout"]."','".$_POST["typeid"]."','".$_POST["name"]."','".$_POST["phone"]."','否','是')";
-
+    $money = $_POST["days"] * $_POST["price"];
+    $sql2 = "insert into orders (orderid,roomid,cardid,entertime,days,typeid,linkman,phone,ostatus,oremarks,monetary,messages) values('".date('his')."','".$_POST["roomid"]."','".$_POST["card"]."','".$_POST["checkin"]."','".$_POST["days"]."','".$_POST["typeid"]."','".$_POST["name"]."','".$_POST["phone"]."','否','是','".$money."','".$_POST["content"]."')";
     mysqli_query($db_link,$sql2) or die ("在orders表中插入记录失败");
 
 
@@ -102,7 +98,20 @@
           }
       }
    }
-
+   //新增用户
+   if($_POST["action"]=="insetr")
+   { 
+     $sql = "insert into admin (name,passwd) values('".$_POST["name"]."','".$_POST["password"]."')";
+     $arr=mysqli_query($db_link,$sql);
+     if ($arr)
+     {
+       echo "<script language=javascript>alert('新增用户成功！');window.location='admin_addr.php'</script>";
+     }
+     else
+     {
+       echo "<script>alert('新增用户失败');history.go(-1);</script>";
+     }
+   }
 
   
   

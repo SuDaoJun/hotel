@@ -67,7 +67,7 @@
           </tr>
               <?php
               require("../dbconnect.php");
-              $sql = "select a.* from customer a,orders b where a.cardid=b.cardid and b.oremarks='是' and b.roomid = '".@$_POST["roomid"]."'";
+              $sql = "select * from orders where  oremarks='是' and roomid = '".@$_POST["roomid"]."'";
               $rs=mysqli_query($db_link,$sql);
               if($rs){
               $s=mysqli_num_rows($rs);
@@ -82,10 +82,10 @@
               while($rows=mysqli_fetch_assoc($rs)) 
               { ?>
                <tr>
-                <td class='tc'><?php echo $rows["cname"] ?></td>
+                <td class='tc'><?php echo $rows["linkman"] ?></td>
                 <td class='tc'><?php echo $rows["cardid"] ?></td>
                 <td class='tc'><?php echo $rows["phone"] ?></td>
-                <td class='tc'><?php echo $rows["message"] ?></td>
+                <td class='tc'><?php echo $rows["messages"] ?></td>
               </tr>
             <?php } ?>
           <?php } ?>
@@ -95,25 +95,22 @@
              <th class='tc'>订单流水号</th>
              <th class='tc'>房间号</th>
              <th class='tc'>入住时间</th>
-             <th class='tc'>离开时间</th>
-             <th class='tc'>住宿天数（天）</th>
+             <th class='tc'>备注信息</th>
+             <th class='tc'>住宿天数</th>
              <th class='tc'>房间类型</th>
-             <th class='tc'>房间价格（元/天）</th>
-             <th class='tc'>消费金额（元）</th>
+             <th class='tc'>房间价格</th>
+             <th class='tc'>消费金额</th>
              <th class='tc'>网上预订</th>
              <th class='tc'>交易完成</th>
           </tr>
            <?php
               require("../dbconnect.php");
-              $sql = "select a.orderid,a.roomid,a.entertime,a.leavetime,b.typename,b.price,a.ostatus,a.oremarks,a.typeid from orders a,roomtype b where a.typeid=b.typeid and a.oremarks='是' and a.roomid = '".@$_POST["roomid"]."'";
+              $sql = "select a.orderid,a.roomid,a.entertime,a.messages,a.monetary,a.days,b.typename,b.price,a.ostatus,a.oremarks,a.typeid from orders a,roomtype b where a.typeid=b.typeid and a.oremarks='是' and a.roomid = '".@$_POST["roomid"]."'";
               $rs=mysqli_query($db_link,$sql);
               if($rs){
               $s=mysqli_num_rows($rs);
               }else{
                 $s=0;
-              }
-              function timeChange($time){
-                  return date('Ymd',strtotime($time));;
               }
               if(!$s)
               {
@@ -122,25 +119,23 @@
                 echo "入住信息如下，请确认：";
                 while($rows=mysqli_fetch_assoc($rs))
               {
-                $datenum=timeChange($rows["leavetime"])-timeChange($rows["entertime"]);
-                $monetary=$rows["price"] * $datenum;  
                 ?>                            
                 <tr>
                 <td class='tc'><?php echo $rows["orderid"] ?></td>
                 <td class='tc'><?php echo $rows["roomid"] ?></td>
                 <td class='tc'><?php echo $rows["entertime"] ?></td>
-                <td class='tc'><?php echo $rows["leavetime"] ?></td>
-                <td class='tc'><?php echo $datenum ?></td>
+                <td class='tc'><?php echo $rows["messages"] ?></td>
+                <td class='tc'><?php echo $rows["days"] ?></td>
                 <td class='tc'><?php echo $rows["typename"] ?></td>
                 <td class='tc'><?php echo $rows["price"] ?></td>
-               <td class='tc'><?php echo $monetary ?></td>
+               <td class='tc'><?php echo $rows["monetary"] ?></td>
                 <td class='tc'><?php echo $rows["ostatus"] ?></td>
                 <td class='tc'><?php echo $rows["oremarks"] ?></td>
                               
                 </tr>
 
           </table>
-          <a href='update.php?crid=<?php echo $rows["roomid"] ?>&money=<?php echo $monetary ?>&typeid=<?php echo $rows["typeid"] ?>&orderid=<?php echo $rows["orderid"] ?>'  class='link-update tf'>确认退房</a>
+          <a href='update.php?crid=<?php echo $rows["roomid"] ?>&typeid=<?php echo $rows["typeid"] ?>&orderid=<?php echo $rows["orderid"] ?>'  class='link-update tf'>确认退房</a>
 
             <?php } ?>
            <?php } ?>

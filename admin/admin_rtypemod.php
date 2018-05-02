@@ -47,18 +47,26 @@
     ?>
     <div class="main-wrap">
       <div class="crumb-wrap">
-        <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">房类管理</span></div>
+        <div class="crumb-list"><i class="icon-font"></i><a href="admin_rtypemgr.php">房类管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">房类修改</span></div>
       </div>
       <div class="result-wrap">
         <form id="myform" name="myform" method="post" action="update.php?mtid=<?php echo $rows[0] ?>">
         <ul class="order">
           <li>
             <label for="typename">类型名称&emsp;</label>
-            <input name="typename" type="text" id="typename" value="<?php echo $rows[1] ?>" size="30" maxlength="50" />
+            <input name="typename" type="text" id="typename" value="<?php echo $rows[1] ?>" size="15" maxlength="50" />
           </li>
           <li>
             <label for="area">房间面积&emsp;</label>
-            <input name="area" type="text" id="area" value="<?php echo $rows[2] ?>" size="30" maxlength="50" />
+            <input name="area" type="text" id="area" value="<?php echo $rows[2] ?>" size="5" maxlength="50" /> 平方米
+          </li>
+          <li>
+            <label for="totalnum">房间数量&emsp;</label>
+            <input name="totalnum" type="text" id="totalnum" value="<?php echo $rows[6] ?>" size="5" maxlength="10" /> 间
+          </li>
+          <li>
+            <label for="leftnum">剩余数量：</label>
+            <input name="leftnum" type="text" id="leftnum" value="<?php echo $rows[7] ?>" size="5" maxlength="10" /> 间
           </li>
           <li>
             <label for="hasNet">网&emsp;&emsp;络&emsp;</label>
@@ -79,14 +87,6 @@
           <li>
             <label for="price">价&emsp;&emsp;格&emsp;</label>
             <input name="price" type="text" id="price" value="<?php echo $rows[5] ?>" size="10" maxlength="15" /> 元
-          </li>
-          <li>
-            <label for="totalnum">房间数量&emsp;</label>
-            <input name="totalnum" type="text" id="totalnum" value="<?php echo $rows[6] ?>" size="10" maxlength="15" /> 间
-          </li>
-          <li>
-            <label for="leftnum">剩余数量：</label>
-            <input name="leftnum" type="text" id="leftnum" value="<?php echo $rows[7] ?>" size="10" maxlength="15" /> 间
           </li>
           <li>
             <input type="reset" class="reset" name="submit2" id="button2" value="重置" />

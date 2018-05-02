@@ -302,10 +302,10 @@ th {
   .table-bordered th,
   .table-bordered td {
     border: 1px solid #ddd !important; } }
-@font-face {
+/* @font-face {
   font-family: 'Glyphicons Halflings';
   src: url(fonts/bootstrap/glyphicons-halflings-regular.eot?1426523004);
-  src: url(fonts/bootstrap/glyphicons-halflings-regular.eot?&1426523004#iefix) format("embedded-opentype"), url(fonts/bootstrap/glyphicons-halflings-regular.woff2?1426523004) format("woff2"), url(fonts/bootstrap/glyphicons-halflings-regular.woff?1426523004) format("woff"), url(fonts/bootstrap/glyphicons-halflings-regular.ttf?1426523004) format("truetype"), url(fonts/bootstrap/glyphicons-halflings-regular.svg?1426523004#glyphicons_halflingsregular) format("svg"); }
+  src: url(fonts/bootstrap/glyphicons-halflings-regular.eot?&1426523004#iefix) format("embedded-opentype"), url(fonts/bootstrap/glyphicons-halflings-regular.woff2?1426523004) format("woff2"), url(fonts/bootstrap/glyphicons-halflings-regular.woff?1426523004) format("woff"), url(fonts/bootstrap/glyphicons-halflings-regular.ttf?1426523004) format("truetype"), url(fonts/bootstrap/glyphicons-halflings-regular.svg?1426523004#glyphicons_halflingsregular) format("svg"); } */
 .glyphicon {
   position: relative;
   top: 1px;
@@ -12403,7 +12403,8 @@ body.sticky #main-header.sticky {
       font-weight: bold;
       display: inline-block;
       font-size: 26px;
-      text-align: center; }
+      text-align: center; 
+    }
       .gallery-container .image-main-box .item figcaption h4 span {
         font-weight: 300; }
   .gallery-container .image-main-box .item:hover figcaption {

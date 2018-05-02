@@ -46,7 +46,7 @@
     ?>
     <div class="main-wrap">
       <div class="crumb-wrap">
-        <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">大堂入住</span></div>
+        <div class="crumb-list"><i class="icon-font"></i><a href="admin_addn.php">大堂入住</a><span class="crumb-step">&gt;</span><span class="crumb-name">入住信息</span></div>
       </div>
       <div class="result-wrap">
         <form id="myform" name="myform" method="post" action="insert.php">
@@ -80,8 +80,8 @@
             <input name="checkin" type="text" id="entertime"  value=<?php echo date("Y-m-d"); ?> size="30" maxlength="50" />
           </li>
           <li>
-            <label for="leavetime">离开时间&emsp;</label>
-            <input name="checkout" type="text" id="leavetime" required placeholder="选择离开日期" size="30" maxlength="50" />
+            <label for="days">住宿天数&emsp;</label>
+            <input name="days" type="text" id="days" required placeholder="输入数字即可" size="30" maxlength="2" />
           </li>
           <li>
             <label for="phone">联系电话&emsp;</label>
@@ -94,13 +94,51 @@
           <li>
             <input type="reset" class='reset' name="submit2" id="button2" value="重置" />
             <input type="hidden" name="action" value="inserto">
-            <input type="submit" name="submit" id="button" value="确认入住" />
+            <input type="submit" name="submit" id="button" value="确认入住" onclick="return validate()" />
           </li>
 
         </ul>
         </form>
       </div>
     </div>
+    <script>
+      // 表单提交事件判断
+      function validate(){
+        var name = $("input[name='name']");
+        var namecheck = /^[\u4e00-\u9fa5]{2,4}$/;
+        var card = $("input[name='card']");
+        var cardcheck =/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        var phone = $("input[name='phone']");
+        var phonecheck =  /^(((1[3456789][0-9]{1})|(15[0-9]{1}))+\d{8})$/;
+        var days = $("input[name='days']");
+        var dayscheck = /^[1-9]\d{0,1}$/;
+        if(!namecheck.test(name.val())){
+           alert('姓名填写有误');
+           name.val('');
+           name.focus();
+           return false;
+        }
+        if(!cardcheck.test(card.val())){
+           alert('身份证号填写有误');
+           card.val('');
+           card.focus();
+           return false;
+        }
+        if(!phonecheck.test(phone.val())){
+           alert('手机号填写有误');
+           phone.val('');
+           phone.focus();
+           return false;
+        }
+        if(!dayscheck.test(days.val())){
+           alert('住宿天数填写有误');
+           days.val('');
+           days.focus();
+           return false;
+        }
+        return true;
+      }
+    </script>
     <!--/main-->
   </div>
 </body>

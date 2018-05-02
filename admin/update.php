@@ -16,43 +16,31 @@
   //退房释放资源
   if(@$_GET["crid"])
   {
-    //将订单信息移到record表,表设置的是自增，移入的时候和record的主键重复冲突，导致失败
-    $sql1 = "insert into record(orderid,roomid,cardid,cname,entertime,leavetime,typeid,linkman,phone,ostatus,oremarks) select * from (select a.orderid,a.roomid,a.cardid,b.cname,a.entertime,a.leavetime,a.typeid,a.linkman,a.phone,a.ostatus,a.oremarks from orders a,customer b where a.cardid=b.cardid and a.orderid='".$_GET["orderid"]."') tmp";
+    //将订单信息移到record表,表设置的是自增，移入的时候和record的主键重复冲突，导致失败,所以订单流水设置为时间戳
+    $sql1 = "insert into record(orderid,roomid,cardid,entertime,days,typeid,linkman,phone,ostatus,oremarks,monetary,messages) select * from orders where orderid='".$_GET["orderid"]."'";
     mysqli_query($db_link,$sql1) or die ("将订单信息移到record表失败");
     
-    //更新record表中monetary字段
-    $sql2 = "update record set monetary=".$_GET["money"]." where roomid = '".$_GET["crid"]."' and orderid='".$_GET["orderid"]."'";
-
-    mysqli_query($db_link,$sql2) or die ("更新record表中monetary字段失败");
-    
     //删除orders中相应的记录
-    $sql3 = "delete from orders where roomid = '".$_GET["crid"]."' and orderid='".$_GET["orderid"]."'";
-    mysqli_query($db_link,$sql3) or die ("删除orders中相应的记录失败");
-    
-    //删除customer表中的客户记录
-    $sql4 = "delete from customer where cardid in (select cardid from record where roomid = '".$_GET["crid"]."' and orderid=".$_GET["orderid"].")";
-
-    mysqli_query($db_link,$sql4) or die ("删除customer表中的客户记录失败");
+    $sql2 = "delete from orders where orderid='".$_GET["orderid"]."'";
+    mysqli_query($db_link,$sql2) or die ("删除orders中相应的记录失败");
     
     //更新roomtype表中leftunm字段
-    $sql5 = "update roomtype set leftnum=leftnum+1 where typeid='".$_GET["typeid"]."'";
+    $sql3 = "update roomtype set leftnum=leftnum+1 where typeid='".$_GET["typeid"]."'";
 
-    mysqli_query($db_link,$sql5) or die ("更新roomtype表中leftunm字段失败");
+    mysqli_query($db_link,$sql3) or die ("更新roomtype表中leftunm字段失败");
 
     //更新room表中status字段
-    $sql6 = "update room set status='否' where roomid='".$_GET["crid"]."'";
+    $sql4 = "update room set status='否' where roomid='".$_GET["crid"]."'";
 
-    mysqli_query($db_link,$sql6) or die ("更新room表中status字段失败");
+    mysqli_query($db_link,$sql4) or die ("更新room表中status字段失败");
   
     echo "<script language=javascript>alert('退房清算成功');window.location='admin_checkout.php'</script>"; 
   }
   //订单修改
   if(@$_POST["action"]=="dmod"){
-    $sql = "update orders set orderid='".$_POST["orderid"]."',roomid='".$_POST["roomid"]."',cardid='".$_POST["cardid"]."',entertime='".$_POST["entertime"]."',leavetime='".$_POST["leavetime"]."',linkman='".$_POST["linkman"]."',phone='".$_POST["phone"]."' where orderid = '".$_POST["orderid"]."'";
+    $sql = "update orders set orderid='".$_POST["orderid"]."',roomid='".$_POST["roomid"]."',cardid='".$_POST["cardid"]."',entertime='".$_POST["entertime"]."',days='".$_POST["days"]."',linkman='".$_POST["linkman"]."',messages='".$_POST["content"]."',monetary='".$_POST["monetary"]."',phone='".$_POST["phone"]."' where orderid = '".$_POST["orderid"]."'";
     $arry=mysqli_query($db_link,$sql);
-    $sql2 = "update roomtype set price='".$_POST["price"]."' where typeid='".$_POST["typeid"]."'";
-    $arry2=mysqli_query($db_link,$sql2);
-    if($arry && $arry2){
+    if($arry){
      echo "<script> alert('订单信息修改成功');location='admin_queryo.php';</script>";
     }else{
       echo "<script>alert('订单信息修改失败');history.go(-1);</script>";

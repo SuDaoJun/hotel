@@ -42,27 +42,7 @@
       <div class="crumb-wrap">
         <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.php">后台管理</a><span class="crumb-step">&gt;</span><span class="crumb-name">房类管理</span></div>
       </div>
-      <div class="search-wrap">
-        <div class="search-content">
-          <form action="admin_rtypemgr.php" method="post">
-            <table class="search-tab">
-              <tr>
-                <th width="120">查询条件</th>
-                <td>
-                  <select name="search-type" id="">
-                    <option value="typename" selected>类型名称</option>
-                    <option value="area">房间面积</option>
-                    <option value="price">房间价格</option>
-                  </select>
-                </td>
-                <th width="70">关键字</th>
-                <td><input class="common-text" placeholder="请输入查询条件" name="keywords" value="" id="" type="text"></td>
-                <td><input  name="sub" value="查询" type="submit"></td>
-              </tr>
-            </table>
-          </form>
-        </div>
-      </div>
+      <div class="search-wrap">房间类型显示</div>
       <div class="result-wrap">
         <div class="result-content">
           <table class="result-tab" width="100%">
@@ -79,16 +59,32 @@
             </tr>
             <?php
               require("../dbconnect.php");
-              $sql = "select * from roomtype where ".@$_POST["search-type"]." like ('%".@$_POST["keywords"]."%')";
+              $pagesize = 10;
+              $sql = "select * from roomtype";
               $rs=mysqli_query($db_link,$sql);
-              if($rs){
-              $s=mysqli_num_rows($rs);
-              }else{
-                $s=0;
-              }
-              if(!$s)
+              if(!$rs)
               {
-                  echo "无满足条件的记录，请继续查询！";
+                  echo "无房间类型信息！";
+                  exit;
+              }
+              $recordcount=mysqli_num_rows($rs);
+              $pagecount=($recordcount-1)/$pagesize+1;
+              $pagecount=(int)$pagecount;
+              $pageno=@$_GET["pageno"];
+              if($pageno=="")
+              {
+                  $pageno=1;
+              }
+              if($pageno>$pagecount)
+              {
+                  $pageno=$pagecount;
+              }
+              $startno=($pageno-1)*$pagesize;
+              $sql = "select * from roomtype order by typeid asc limit $startno,$pagesize";
+              $rs=mysqli_query($db_link,$sql);
+              if(!$rs)
+              {
+                  echo "无房间类型信息";
                   exit;
               }
               while($rows=mysqli_fetch_assoc($rs))
@@ -111,7 +107,29 @@
 
             <?php } ?>
           </table>
-          
+          <div class="list-page">
+              <?php
+                if($pageno==1)
+                {
+                  if($recordcount>$pagesize){
+                    echo "首页 | 上一页 | <a href='?pageno=".($pageno+1)."'>下一页</a> | <a href='?pageno=".$pagecount."'>末页</a>";
+                  }else{
+                    echo "首页 | 上一页 | 下一页 | 末页";
+                  }
+                  
+                }
+                else if($pageno==$pagecount)
+                {
+                  echo "<a href='?pageno=1'>首页</a> | <a href='?pageno=".($pageno-1)."'>上一页</a> | 下一页 | 末页";
+                }
+                else
+                {
+                  echo "<a href='?pageno=1'>首页</a> | <a href='?pageno=".($pageno-1)."'>上一页</a> | <a href='?pageno=".($pageno+1)."'>下一页</a> | <a href='?pageno=".$pagecount."'>末页</a>";
+                }
+                
+                echo "&nbsp;&nbsp;页次：".$pageno."/".$pagecount."页&nbsp;共有".$recordcount."条信息";
+              ?>
+          </div>
         </div>
       </div>
     </div>

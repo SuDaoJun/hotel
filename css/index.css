@@ -55,7 +55,8 @@ body.sticky #main-header.sticky #top-logo .title{margin:8px 0 8px;}
 .gallery-h3-title{overflow-x:hidden;text-overflow:ellipsis;white-space:nowrap;padding:25px 18px;font-size:15px;font-weight:bold;margin-bottom:0;text-align:center;margin-top:0;}
 .gallery-h3-title a{color:inherit;}
 .gallery-h3-title a:hover,.iport-h3-title a:active{color:#c5a46d;}
-.gallery-container .image-main-box .item figcaption h4{font-size:16px;line-height:1.6;}
+.gallery-container .image-main-box .item figcaption h4{font-size:16px;line-height:1.6;width:200px;overflow: hidden;
+}
 
 #buy-theme{padding:50px 0;}
 #buy-theme .inner-container{max-width:100%;}
@@ -529,3 +530,5 @@ h2.post-title{font-size:20px;letter-spacing:normal;margin-top:0;margin-bottom:12
 .list-page{padding:20px 0;text-align:center;}
 .list-page a{margin:0 5px;padding:2px 7px;border:1px solid #ccc;background:#f3f3f3;}
 .list-page a:hover{background:#e4e4e4;border:1px solid #908f8f;}
+.sys{text-align: center;}
+.sys p{padding-top:15px;font-size:24px;color:#C5A46D;}

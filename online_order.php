@@ -51,7 +51,7 @@ require("head.html");
 <div id="booking-tab-contents" class="tab-content">
 <?php
       require("dbconnect.php");
-      $sql="select a.roomid,b.typeid,b.typename,b.price from room a,roomtype b where a.typeid=b.typeid and a.roomid=".$_GET["orid"];
+      $sql="select a.roomid,b.typeid,b.typename,b.price from room a,roomtype b where a.typeid=b.typeid and a.roomid='".$_GET["orid"]."'";
       $arr=mysqli_query($db_link,$sql);
       $rows=mysqli_fetch_row($arr);
  ?>
@@ -79,7 +79,7 @@ require("head.html");
 	
 	<div class="row">
 		<div class="date-container booking-dates col-xs-12 col-sm-3 col-md-3 col-lg-3">
-			<h4><b>客户姓名</b></h4>
+			<h4><b>顾客姓名</b></h4>
 				<input type="text" placeholder="请输入客户姓名" name="name" class="rooms" />
 		</div>
 		
@@ -89,7 +89,7 @@ require("head.html");
 		</div>
 		<div class="date-container booking-dates col-xs-12 col-sm-3 col-md-3 col-lg-3">
 			<h4><b>联系电话</b></h4>
-				<input type="text" placeholder="请输入联系电话" name="phone" class="rooms" />
+				<input type="text" placeholder="请输入联系电话" name="phone"  class="rooms" />
 		</div>
 		
 		<div class="date-container booking-dates col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -106,13 +106,12 @@ require("head.html");
 				<i class="fa fa-calendar"></i>
 			</div>
 		</div>
-		
-		<div class="date-container booking-dates col-xs-12 col-sm-6 col-md-6 col-lg-6">
-			<h4><b>离开日期</b></h4>
-			<div class="booking-fields checkout-field">
-				<input placeholder="选择离开日期" class="booking-date-fields-container check-out col-checkout" type="text" name="checkout" />
-				<i class="fa fa-calendar"></i>
-			</div>
+		<div class="date-container booking-dates col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<h4><b>住宿天数</b></h4>
+				<input type="text" placeholder="输入纯数字即可" name="days" maxlength='2'  class="days" />
+		</div>
+		<div class="date-container sys booking-dates col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<img src="images/fk.png" width="120px" height="auto" alt=""><p>扫&emsp;一&emsp;扫</p>
 		</div>
 	</div>
 	<div class="tab-pane fadeInUp clearfix active" id="booking-confirmation">
@@ -128,14 +127,42 @@ require("head.html");
 $("#booking-btn").click(function() {
 	var checkin = $("input[name='checkin']");
 	var name = $("input[name='name']");
+	var namecheck = /^[\u4e00-\u9fa5]{2,4}$/;
 	var card = $("input[name='card']");
+	var cardcheck =/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
 	var phone = $("input[name='phone']");
+	var phonecheck =  /^(((1[3456789][0-9]{1})|(15[0-9]{1}))+\d{8})$/;
+	var days = $("input[name='days']");
+	var dayscheck = /^[1-9]\d{0,1}$/;
 	if(!(name.val() && card.val() && phone.val() && checkin.val())){
 		alert("请完善预定相关信息");
-	}else{
-		$("#book-form").submit();
+		return false;
+	}	
+	if(!namecheck.test(name.val())){
+	   alert('姓名填写有误');
+	   name.val('');
+	   name.focus();
+	   return false;
 	}
-	
+	if(!cardcheck.test(card.val())){
+	   alert('身份证号填写有误');
+	   card.val('');
+	   card.focus();
+	   return false;
+	}
+	if(!phonecheck.test(phone.val())){
+	   alert('手机号填写有误');
+	   phone.val('');
+	   phone.focus();
+	   return false;
+	}
+	if(!dayscheck.test(days.val())){
+	   alert('住宿天数填写有误');
+	   days.val('');
+	   days.focus();
+	   return false;
+	}
+	$("#book-form").submit();
 });
 </script>
 

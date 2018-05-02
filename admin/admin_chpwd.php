@@ -51,19 +51,19 @@
           <ul class="order">
             <li>
               <label for="name">用户名&emsp;</label>
-              <input type="text" id='name' class='jz' readonly value='<?php echo $_SESSION["aname"]; ?>'>      
+              <input type="text"  id='name' class='jz' readonly value='<?php echo $_SESSION["aname"]; ?>'>      
             </li>
             <li>
               <label for="password">原密码&emsp;</label>
-              <input name="password" type="password" required id="password" size="20">
+              <input name="password" placeholder="请输入原始密码" type="password" required id="password" size="20">
             </li>
             <li>
               <label for="password2">新密码&emsp;</label>
-              <input  name="password2" type="password" required id="password2" size="20">
+              <input  name="password2" placeholder="请输入新密码" type="password" required id="password2" size="20">
             </li>
             <li>
               <label for="password3">确认密码&emsp;</label>
-              <input  name="password3" type="password" required id="password3" size="20">
+              <input  name="password3" placeholder="请确认密码" type="password" required id="password3" size="20">
             </li>
             <li>
               <input type="hidden" name='action' value='psw'>

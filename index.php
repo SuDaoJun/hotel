@@ -118,14 +118,14 @@ require("head.html");
     ?>
         <li class="item col-sm-3 col-xs-6 col-md-3 igal-item">
             <figure>
-                <img alt='<?php echo $rows["title"] ?>' src='images/<?php echo $rows["spic"] ?>'/>
+                <img width='269px' height='192px' alt='<?php echo $rows["title"] ?>' src='images/<?php echo $rows["spic"] ?>'/>
                 <a class="more-details" data-title='<?php echo $rows["title"] ?>' href='images/<?php echo $rows["bpic"] ?>'>
                     
                 </a>
                 <figcaption>
                     <h4>
                         <span>
-                            <?php echo $rows["title"] ?>
+                            <?php echo $rows["describes"] ?>
                         </span>
                     </h4>
                 </figcaption>

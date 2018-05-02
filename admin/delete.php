@@ -1,24 +1,31 @@
 ﻿<?php
   require("../dbconnect.php");
   // 取消网上订单,先清除外键再清除主键
-  if(@$_GET["cardid"]){
+  if(@$_GET["orderids"]){
     // $sql="delete from customer where cardid=".$_GET["cardid"];
-    $sql="delete from orders where cardid='".$_GET["cardid"]."'";
+    $sql="delete from orders where orderid='".$_GET["orderids"]."'";
     $arry=mysqli_query($db_link,$sql);
     if($arry)
     {
-      $sql2="delete from customer where cardid='".$_GET["cardid"]."'";
-      $arry2=mysqli_query($db_link,$sql2);
-      if($arry2){
-        $sql3 = "update roomtype set leftnum=leftnum+1 where typeid='".$_GET["typeid"]."'";
-        mysqli_query($db_link,$sql3) or die ("更新roomtype表中leftnum字段失败");
+        $sql2 = "update roomtype set leftnum=leftnum+1 where typeid='".$_GET["typeid"]."'";
+        mysqli_query($db_link,$sql2) or die ("更新roomtype表中leftnum字段失败");
         echo "<script> alert('取消订单成功！');location='admin_addo.php';</script>";
-      }else{
-      echo "<script> alert('取消网上订单失败1！');location='admin_addo.php';</script>";
-      }
     }
     else{
-      echo "<script> alert('取消网上订单失败2！');location='admin_addo.php';</script>";
+      echo "<script> alert('取消网上订单失败！');location='admin_addo.php';</script>";
+    }
+  }
+  // 删除历史记录订单
+  if(@$_GET["orderid"])
+  {
+    $sql="delete from record where orderid='".$_GET["orderid"]."'";
+    $arry=mysqli_query($db_link,$sql);
+    if($arry)
+    {
+      echo "<script> alert('删除历史记录订单成功');location='admin_counto.php';</script>";
+    }
+    else{
+      echo "<script> alert('删除历史记录订单失败');location='admin_counto.php';</script>";
     }
   }
   // 删除房间种类
@@ -84,5 +91,22 @@
     else
       echo "删除相册失败";
   }
-
+  //删除用户
+  if(@$_GET["id"])
+  {
+    if($_GET["id"] == '1'){
+        echo "<script> alert('无法删除主用户');location='admin_addr.php';</script>";
+    }else{
+      $sql="delete from admin where id='".$_GET["id"]."'";
+      $arry=mysqli_query($db_link,$sql);
+      if($arry)
+      {
+        echo "<script> alert('删除用户成功');location='admin_addr.php';</script>";
+      }
+      else{
+        echo "删除用户失败";
+      }
+    }
+    
+  }
 ?>

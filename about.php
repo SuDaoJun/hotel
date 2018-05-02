@@ -83,15 +83,45 @@ require("head.html");
 <h3 class="msg-title location">给我们留言</h3>
 <form class="add-msg-form" method="post" action="insert.php" name="msgform" id="contact-form">
 <div class="row">
-<div class="cf-column col-md-6"><input required name="title" id="subject" type="text" placeholder="主题" validate="minlength:2, maxlength:50, required:true"></div>
-<div class="cf-column col-md-6"><input required name="name" id="username" type="text" placeholder="名字" validate="minlength:2, maxlength:50, required:true"></div>
-<div class="cf-column col-md-6"><input required name="mailbox" id="mail" type="text" placeholder="邮箱" validate="maxlength:40, required:true, email:true"></div>
-<div class="cf-column col-md-6"><input required name="phone" id="telephone" type="text" placeholder="电话/手机" validate="minlength:6,maxlength:40, required:true"></div>
-<div class="cf-column col-md-12 cf-tarea"><textarea required name="content" id="comment" placeholder="留言内容" validate="minlength:2, maxlength:200, required:true"></textarea></div>
-<div class="cf-column col-md-12 submit-column">
-<input type="hidden" name="action" value="message">
-<button type="submit" id="submit-btn" class="submit-button">立即提交</button></div>
+    <div class="cf-column col-md-6"><input required name="title" id="subject" type="text" placeholder="主题" validate="minlength:2, maxlength:50, required:true"></div>
+    <div class="cf-column col-md-6"><input required name="name" id="username" type="text" placeholder="名字" validate="minlength:2, maxlength:50, required:true"></div>
+    <div class="cf-column col-md-6"><input required name="mailbox" id="mail" type="text" placeholder="邮箱" validate="maxlength:40, required:true, email:true"></div>
+    <div class="cf-column col-md-6"><input required name="phone" id="telephone" type="text" placeholder="手机" validate="minlength:6,maxlength:40, required:true"></div>
+    <div class="cf-column col-md-12 cf-tarea"><textarea required name="content" id="comment" placeholder="留言内容" validate="minlength:2, maxlength:200, required:true"></textarea></div>
+    <div class="cf-column col-md-12 submit-column">
+    <input type="hidden" name="action" value="message">
+    <button type="submit" onclick="return validate()" id="submit-btn" class="submit-button">立即提交</button></div>
 </div>
+<script>
+  // 表单提交事件判断
+  function validate(){
+    var name = $("input[name='name']");
+    var namecheck = /^[\u4e00-\u9fa5]{2,4}$/;
+    var mailbox = $("input[name='mailbox']");
+    var mailboxcheck =/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+    var phone = $("input[name='phone']");
+    var phonecheck =  /^(((1[3456789][0-9]{1})|(15[0-9]{1}))+\d{8})$/;
+    if(!namecheck.test(name.val())){
+       alert('姓名填写有误');
+       name.val('');
+       name.focus();
+       return false;
+    }
+    if(!mailboxcheck.test(mailbox.val())){
+       alert('邮箱填写有误');
+       mailbox.val('');
+       mailbox.focus();
+       return false;
+    }
+    if(!phonecheck.test(phone.val())){
+       alert('手机号填写有误');
+       phone.val('');
+       phone.focus();
+       return false;
+    }
+    return true;
+  }
+</script>
 </form>
 </div>
 </div>

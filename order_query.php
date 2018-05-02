@@ -105,33 +105,42 @@ require("head.html");
               <th class="tc">订单流水</th>
               <th class="tc">房间号</th>
               <th class="tc">入住时间</th>
-              <th class="tc">离开时间</th>
+              <th class="tc">住宿天数</th>
+              <th class="tc">消费金额</th>
               <th class="tc">房间类型</th>
-              <th class="tc">联系人</th>
+              <th class="tc">顾客姓名</th>
               <th class="tc">联系电话</th>
+              <th class="tc">备注信息</th>
               <th class="tc">网上预定</th>
               <th class="tc">完成交易</th>
             </tr>
             <?php
               require("dbconnect.php");
   
-              $sql = "select a.orderid,a.roomid,a.entertime,a.leavetime,b.typename,a.linkman,a.phone,a.ostatus,a.oremarks from orders a,roomtype b where a.typeid=b.typeid and a.".@$_POST["search-type"]." like ('%".@$_POST["keywords"]."%')";
+              $sql = "select a.orderid,a.roomid,a.entertime,a.days,a.monetary,b.typename,a.linkman,a.phone,a.messages,a.ostatus,a.oremarks from orders a,roomtype b where a.typeid=b.typeid and a.".@$_POST["search-type"]." like ('%".@$_POST["keywords"]."%')";
               $rs=mysqli_query($db_link,$sql);
-              if(!$rs)
+              if($rs){
+              $s=mysqli_num_rows($rs);
+              }else{
+                $s=0;
+              }
+              if(!$s)
               {
-                  echo "无满足条件的记录，请查询！";
+                  echo "无满足条件的记录，请继续查询！";
               }else{
               	while($rows=mysqli_fetch_assoc($rs))
-              {?>
-                            
+              {
+              	?>             
                 <tr>
                 <td class='tc'><?php echo $rows["orderid"] ?></td>
                 <td class='tc'><?php echo $rows["roomid"] ?></td>
                 <td class='tc'><?php echo $rows["entertime"] ?></td>
-                <td class='tc'><?php echo $rows["leavetime"] ?></td>
+                <td class='tc'><?php echo $rows["days"] ?></td>
+                <td class='tc'><?php echo $rows["monetary"] ?></td>
                 <td class='tc'><?php echo $rows["typename"] ?></td>
                 <td class='tc'><?php echo $rows["linkman"] ?></td>
                 <td class='tc'><?php echo $rows["phone"] ?></td>
+                <td class='tc'><?php echo $rows["messages"] ?></td>
                 <td class='tc'><?php echo $rows["ostatus"] ?></td>
                 <td class='tc'><?php echo $rows["oremarks"] ?></td>
                               
