@@ -1,0 +1,108 @@
+<div class="sidebar-wrap">
+      <div class="sidebar-title">
+        <h1>管理菜单</h1>
+      </div>
+      <div class="sidebar-content">
+        <ul class="sidebar-list">
+          <li>
+            <a class="actives" href="javascript:;"><i class="icon-font">&#xe612;</i> 入住管理 <i class="icon-font icon">&#xe62e;</i></a>
+            <ul class="sub-menu">
+              <li><a href="admin_addn.php"><i class="icon-font">&#xe61c;</i>大堂入住</a></li>
+              <li><a href="admin_addo.php"><i class="icon-font">&#xe61c;</i>订单入住</a></li>
+              <li><a href="admin_queryo.php"><i class="icon-font">&#xe61a;</i>入住查询</a></li>
+              <li><a href="admin_counto.php"><i class="icon-font">&#xe64a;</i>入住统计</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="actives" href="javascript:;"><i class="icon-font">&#xe611;</i> 退房管理<i class="icon-font icon">&#xe62e;</i></a>
+            <ul class="sub-menu">
+              <li><a href="admin_checkout.php"><i class="icon-font">&#xe602;</i>退房清算</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="actives" href="javascript:;"><i class="icon-font">&#xe61b;</i> 房间管理<i class="icon-font icon">&#xe62e;</i></a>
+            <ul class="sub-menu">
+              <li><a href="admin_addh.php"><i class="icon-font">&#xe620;</i>新增房间</a></li>
+              <li><a href="admin_roommgr.php"><i class="icon-font">&#xe84b;</i>房间管理</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="actives" href="javascript:;"><i class="icon-font">&#xe639;</i> 房类管理<i class="icon-font icon">&#xe62e;</i></a>
+            <ul class="sub-menu">
+              <li><a href="admin_addt.php"><i class="icon-font">&#xe620;</i>新增房类</a></li>
+              <li><a href="admin_rtypemgr.php"><i class="icon-font">&#xe84b;</i>房类管理</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="actives" href="javascript:;"><i class="icon-font">&#xe60c;</i> 相册管理<i class="icon-font icon">&#xe62e;</i></a>
+            <ul class="sub-menu">
+              <li><a href="admin_addx.php"><i class="icon-font">&#xe620;</i>新增相册</a></li>
+              <li><a href="admin_photomgr.php"><i class="icon-font">&#xe84b;</i>相册管理</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="actives" href="javascript:;"><i class="icon-font">&#xe60a;</i> 留言管理<i class="icon-font icon">&#xe62e;</i></a>
+            <ul class="sub-menu">
+              <li><a href="admin_message.php"><i class="icon-font">&#xe667;</i>留言查看</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="actives" href="javascript:;"><i class="icon-font">&#xe64b;</i> 系统管理<i class="icon-font icon">&#xe62e;</i></a>
+            <ul class="sub-menu">
+              <li><a href="admin_addr.php"><i class="icon-font">&#xe620;</i>人员添加</a></li>
+              <li><a href="admin_chpwd.php"><i class="icon-font">&#xe69f;</i>密码修改</a></li>
+              <li><a href="admin_logout.php"><i class="icon-font">&#xe638;</i>退出系统</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 换肤 -->
+    <div class="set-btn"></div>
+    <div class='skin'>
+      <div class="skin_z">
+        <div class="skin_t">推&emsp;荐</div>
+        <div class="skin_s">收&emsp;起</div>
+      </div>
+      <div class="skin_con">
+          <img class="big" src="img/a0.jpg">
+          <img src="img/a1.jpg">
+          <img src="img/a2.jpg">
+          <img src="img/a3.jpg">
+          <img src="img/a4.jpg">
+          <img src="img/a5.jpg">
+          <img class="big" src="img/a6.jpg">
+          <img src="img/a7.jpg">
+          <img src="img/a8.jpg">
+          <img class="last" src="img/a9.jpg">
+          <img class="last" src="img/a10.jpg">
+          <img class="last" src="img/a11.jpg">
+      </div>
+    </div>
+<script src="../js/jquery.min.js" type="text/javascript"></script>
+<script>
+  $(function() {
+   var local =  localStorage.getItem("bgurl")? localStorage.getItem("bgurl"):'img/a0.jpg'; 
+    $("body").css("backgroundImage",'url('+local+')');
+        $('.actives').click(function(){  
+            if($(this).siblings('ul').css('display')=='none'){  
+                $(this).find('.icon').html('&#xe62e;');   
+                $(this).siblings('ul').slideDown(100).children('li');  
+            }else{  
+                $(this).find('.icon').html('&#xe62d;');  
+                $(this).siblings('ul').slideUp(100);  
+            }  
+        })
+        $(".set-btn").click(function(){
+        $(".skin").animate({height:"265px"},1000);
+        });
+        $(".skin_s").click(function(){
+        $(".skin").animate({height:"0px"},1000);
+        });
+        $(".skin_con img").click(function(){
+        var i=$(this).attr('src');
+        localStorage.setItem("bgurl", i);      
+        $("body").css("backgroundImage",'url('+i+')');
+        });
+    });  
+</script>

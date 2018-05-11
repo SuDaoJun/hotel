@@ -1,0 +1,782 @@
+@charset "UTF-8";
+/*css reset */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img { margin:0; padding:0;}
+fieldset, img,input,button { border:none; padding:0;margin:0;outline-style:none; }
+ul, ol { list-style:none; }
+input { padding-top:0; padding-bottom:0; font-family: "SimSun","ËÎÌå";}
+select, input { vertical-align:middle;}
+select, input, textarea { font-size:14px; margin:0; }
+textarea { resize:none; } 
+img {border:0;	vertical-align:middle; } 
+table { border-collapse:collapse; }
+body {
+    font:14px/20px Arial,Verdana,"\5b8b\4f53";
+    font-family: "Open Sans","Lobster",Raleway,Arial,Verdana,Helvetica,'Microsoft Yahei',Lato,sans-serif;
+    color:#666;
+    background:#fff;
+    font-weight: 300;
+}
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after{clear:both;}
+.clearfix{
+    *zoom:1;
+}
+input[type="text"].placeholder,textarea.placeholder { color: #666; }
+input[type="text"]::-moz-placeholder,textarea::-moz-placeholder { color: #666; }
+input[type="text"]:-ms-input-placeholder,textarea:-ms-input-placeholder { color: #666; }
+input[type="text"]::-webkit-input-placeholder,textarea::-webkit-input-placeholder { color: #666; }
+a {color:#666; text-decoration:none; }
+a:hover{color:#c5a46d;}
+h1,h2,h3,h4,h5,h6 {text-decoration:none;font-weight:normal;font-size:100%;}
+s,i,em{font-style:normal;text-decoration:none;}
+
+/* 头部 */
+.top-header {
+  background: #333333;
+  color: #FFFFFF;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  letter-spacing: 1px; 
+}
+.container{
+	width: 1200px;
+	margin: 0 auto;
+}
+.top-header .contact-info {
+    float: left; 
+}
+.contact-info li{
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 15px;
+	margin-right: 15px;
+	position: relative;
+}
+.contact-info li:first-child:after{
+	display: block;
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 10px;
+	width: 1px;
+	height: 10px;
+	background: #C5A46D;
+}
+.contact-info li i{
+	margin-right: 10px;
+	color: #C5A46D;
+}
+.welcome{
+  cursor: pointer;
+  font-size: 14px;
+  font-style: italic;
+  transition: all 0.4s ease;
+  height: 30px;
+  float: right;
+}
+.welcome:hover{
+  color: #c5a46d;
+  font-size: 12px;
+}
+.welcome>marquee>span{
+  color: #c5a46d;
+}
+marquee{
+    width: 400px;
+    height: 30px;
+    line-height: 30px;
+}
+.main-header{
+  background: rgba(51, 51, 51, 0.7);
+  color: #FFFFFF;
+  position: absolute;
+  left: 0;
+  top: 30px;
+  z-index: 10;
+  width: 100%;
+  height: 100px;
+}
+.container .left-sec{
+	background: #C5A46D;
+    position: relative;
+    width: 16%;
+    float: left;
+}
+.container .left-sec:before{
+	display: block;
+	content: "";
+	position: absolute;
+	right: 100%;
+	top: 0;
+	background: #C5A46D;
+	width: 1000px;
+	height: 100px;
+}
+.main-header .top-logo{
+	width: 100%;
+	height: 100px;
+	float: left;
+	text-align: center;
+}
+.top-logo .title{
+	margin: 10px 20px 2px;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #fff;
+}
+.title>a>img{
+	max-height: 52px;
+}
+.container .right-sec{
+	width: 84%;
+	height: 100px;
+	float: left;
+}
+.right-sec .main-menu{
+	float: right;
+}
+.main-menu .list-inline li{
+	display: inline-block;
+}
+.main-menu .list-inline .active{
+	background-color: #C5A46D;
+}
+.list-inline li:hover{
+	background-color: #C5A46D;
+}
+.list-inline li a{
+	display: block;
+	padding: 0 10px;
+	line-height: 100px;
+	position: relative;
+	white-space: nowrap;
+	color: #fff;
+}
+/* 轮播 */
+.main-slider{
+	position: relative;
+	width: 100%;
+	height: 395px;
+}
+.main-slider>ul>li{
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+	height: 395px;
+	overflow: hidden;
+}
+.main-slider>ul>.on{
+	display: block;
+}
+.main-slider>ul>li>img{
+	width: 100%;
+}
+.main-slider .page{
+	position: absolute;
+	left: 50%;
+	bottom: 30px;
+	text-align: center;
+	transform: translateX(-50%);
+}
+.page>ul>li{
+	width: 15px;
+	height: 15px;
+	border-radius: 50% 50%;
+	background-color: #333333;
+	margin-right: 5px;
+	float: left;
+	cursor: pointer;
+}
+.page>ul>li:hover{
+	background-color: #C5A46D;
+}
+.page>ul>.active{
+	background-color: #C5A46D;
+}
+/* 房间推荐 */
+.luxury-rooms{
+	background-color: #f6f6f6;
+	overflow: hidden;
+}
+.heading-box{
+	margin: 35px 0 50px;
+	text-align: center;
+}
+.heading-box h2{
+	color: #C5A46D;
+	display: inline-block;
+	border-bottom: 1px solid #C5A46D;
+	padding: 0 20px 35px;
+	margin: 20px 0;
+	font-size: 36px;
+	letter-spacing: -2px;
+	position: relative;
+}
+.heading-box h2:before{
+	display: block;
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -8px;
+	margin-left: -8px;
+	border: 1px solid #FFFFFF;
+	background: #FFFFFF;
+	width: 15px;
+	height: 15px;
+	z-index: 2;
+	box-shadow: 0 0 0 1px #C5A46D, inset 0 0 0 2px #C5A46D;
+}
+.heading-box h2:after{
+	display: block;
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 1px;
+	margin-left: -46%;
+	background: #C5A46D;
+	width: 92%;
+	height: 1px;
+}
+.heading-box h2 a{
+	color: #C5A46D;
+}
+.heading-box h2 a:hover{
+	color: #C5A46D;
+}
+.heading-box h2 a span,.heading-box h2 span{
+	font-weight: bold;
+}
+.heading-box .subtitle{
+	font-weight: 300;
+	font-size: 16px;
+	color: #282828;
+}
+.room-container .room-box{
+	width: 25%;
+	float: left;
+	position: relative;
+	text-align: center;
+	margin-bottom: 60px;
+	padding: 0 15px;
+	box-sizing: border-box;
+}
+.room-box .img-container{
+	overflow: hidden;
+}
+.room-box .img-container img{
+	display: inline-block;
+	width: 100%;
+	max-width: 100%;
+    height: 196px;
+    transition: all 0.5s ease;
+}
+.room-box .img-container img:hover{
+	transform: scale(1.3);
+}
+.room-box .details{
+    min-height: 192px;
+    background-color: #fff;
+    padding: 30px 0 43px;
+    border-bottom: 1px solid #C5A46D;
+    position: relative;
+    box-sizing: border-box;
+}
+.room-box:hover .details{
+	background-color: #f0f2f2;
+	border-color: #333;
+}
+.room-box .details .title{
+	overflow-x:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	font-size:16px;
+	letter-spacing:normal;
+	margin-bottom:20px;
+	line-height:1.4;
+}
+.details .title a{
+	color: #C5A46D;
+}
+.details .desc{
+	line-height: 1.4;
+	max-width: 80%;
+	margin: 0 auto;
+}
+.details .price{
+	padding: 0 20px;
+	border: 1px solid #C5A46D;
+	background: #FFFFFF;
+	font-family: "Lobster", Arial, Helvetica, "Microsoft YaHei",sans-serif;
+	position: absolute;
+	left: 50%;
+	bottom: -23px;
+	color: #C5A46D;
+	height: 45px;
+	line-height: 45px;
+	white-space: nowrap;
+	transform: translateX(-50%);
+}
+.details .price span{
+	font-size: 18px;
+}
+/* 宾馆相册 */
+.gallery{
+	text-align: center;
+}
+.gallery-container{
+	margin-bottom: 25px;
+}
+.image-main-box .igal-item{
+	width: 25%;
+	padding: 0 15px;
+	float: left;
+	box-sizing: border-box;
+}
+.image-main-box .igal-item:hover .figcaption{
+	opacity: 1;
+	left: 10px;
+}
+.image-main-box .igal-item .figure{
+	position: relative;
+	overflow: hidden;
+	padding: 1px;
+	width: 100%;
+	height: 100%;
+	border: 2px solid #FFFFFF;
+	transition: all 0.3s ease;
+	box-shadow: 0 0 0 2px #C5A46D, inset 0 0 0 1px #C5A46D;
+}
+.image-main-box .igal-item .figure a{
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	z-index: 11;
+}
+.image-main-box .igal-item .figcaption{
+	display: block;
+	position: absolute;
+	left: -10px;
+	top: 10px;
+	background: rgba(0, 0, 0, 0.8);
+	opacity: 0;
+	transition: all 0.5s ease;
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+}
+.image-main-box .igal-item .figcaption h4{
+	font-size:16px;
+	line-height:1.6;
+	width:200px;
+	overflow: hidden;
+	position: absolute;
+	left: 50%;
+	top: 45%;
+	color: #C5A46D;
+	transform: translateX(-50%) translateY(-50%);
+	font-weight: bold;
+	display: inline-block;
+	text-align: center; 
+}
+.gallery-h3-title{
+	overflow-x:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	padding:25px 18px;
+	font-size:15px;
+	font-weight:bold;
+	margin-bottom:0;
+	text-align:center;
+	margin-top:0;
+}
+.gallery-h3-title a:hover{
+	color:#C5A46D;
+}
+.titles{
+	width: 100%;
+	font-size: 22px;
+	color: #C5A46D;
+	line-height: 30px;
+	padding: 50px 0 50px 90px;
+	background-color: #f8f9f9;
+}
+.titles span{
+	font-weight: bold;
+    color: #333333;
+}
+/* 底部 */
+.top-footer{
+  background: #333333;
+  color: #d0d4d7;
+  position: relative;
+  border-top: 3px solid #C5A46D;
+  padding-top: 40px;
+}
+.top-footer .go-up-box{
+	width: 40px;
+	height: 40px;
+	background: #C5A46D;
+	position: absolute;
+	top: -25px;
+	left: 50%;
+	text-align: center;
+	line-height: 40px;
+	font-size: 16px;
+	cursor: pointer;
+	transform: translateX(-40%); 
+}
+.container .widget{
+	width: 50%;
+	float: left;
+	box-sizing: border-box;
+	text-align: center;
+}
+.widget h4{
+	font-size:20px;
+	font-weight:bold;
+	margin-bottom:30px;
+	text-align: center;
+	color: #C5A46D;
+	padding: 0 40px;
+}
+.color-title a{
+	color: #c5a46d;
+}
+.widget .widget-content{
+	line-height: 25px;
+	padding: 0 40px;
+	min-height: 200px;
+}
+.widget-content ul.social-icons{
+	margin-top: 22px;
+	margin-left: -4px;
+}
+.widget-content ul.social-icons li{
+	width: 35px;
+	height: 35px;
+	padding: 0;
+	margin: 4px;
+	text-align: center;
+	display: inline-block;
+}
+.widget-content ul.social-icons li a{
+	display: block;
+	border: 1px solid #262626;
+	overflow: hidden;
+	line-height: 1.66;
+	transition: all 0.3s ease;
+}
+.widget-content ul.social-icons li a i{
+	color: #d0d4d7;
+	margin: 0;
+	line-height: 35px;
+	font-size: 1.1em;
+	transition: all 0.3s ease;
+}
+.widget-content ul.social-icons li:hover a {
+    background: #262626; 
+}
+.widget-content ul.social-icons li:hover a i {
+    color: #C5A46D; 
+}
+.widget-content ul li{
+	margin-bottom: 15px;
+}
+.widget-content ul li i{
+	margin-right: 15px;
+	color: #C5A46D;
+	font-size: 1.4em;
+}
+/* 宾馆在线预订 */
+.internal-page-title{
+	width: 100%;
+	background-image: url(../images/inner-bg.jpg);
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+	padding: 170px 0 80px;
+	position: relative;
+	z-index: 1;
+	border-bottom: 3px solid #C5A46D;
+}
+.internal-page-title:before{
+	z-index: -1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.55); 
+}
+.internal-page-title h1 {
+    font-size: 38px;
+    margin: 0;
+    letter-spacing: -1px;
+    color: #C5A46D; 
+}
+.internal-page-title .breadcrumb {
+  display: inline-block;
+  padding: 7px 25px;
+  background: #C5A46D;
+  font-size: .9em;
+  letter-spacing: 2px;
+  color: #000000;
+  margin-top: 39px;
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  transform: translateX(-50%); 
+}
+.internal-page-title .breadcrumb a{
+	color: #000000;
+}
+.internal-page-title .breadcrumb a:hover{
+	color: #fff;
+}
+/* 表格 */
+.result-tab{border-collapse:collapse;border: 1px solid #ddd;}
+.result-tab th{font-weight: normal;font-size: 15px;text-align: left;}
+.result-tab th,.result-tab td{padding:5px;border-bottom: 1px solid #ddd;border-right: 1px solid #e1e1e1;}
+.result-tab tr{line-height:35px;}
+.result-tab th.tc,.result-tab td.tc{text-align: center;}
+.result-tab tr:nth-child(odd){background: #fff;}
+.result-tab tr:hover{background: #f1f1f1;}
+.result-tab tr.even-tr{background: #e9fff2;}
+.link-update{color:#428bca;}
+.list-page{padding:20px 0;text-align:center;}
+.list-page a{margin:0 5px;padding:2px 7px;border:1px solid #ccc;background:#f3f3f3;}
+.list-page a:hover{background:#e4e4e4;border:1px solid #908f8f;}
+
+/* 宾馆提交订单 */
+.booking-page-content{
+	margin-bottom: 40px;
+	padding: 20px 0;
+}
+.booking-tab-contents .rows{
+	margin-left: -15px;
+	margin-right: -15px;
+}
+.rows .date-container{
+	width: 25%;
+	float: left;
+	margin-bottom: 25px;
+	padding-left: 15px;
+	padding-right: 15px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.rows2>.date-container:first-child{
+	width: 50%;
+}
+.rows .date-container h4{
+	font-size: 20px;
+	color: #C5A46D;
+	line-height: 70px;
+	text-align: center;
+	letter-spacing: -1px;
+}
+.booking-tab-contents input[type="text"].room{
+	background-color: #C5A46D;
+	text-align: center;
+}
+.booking-tab-contents input[type="text"], .booking-tab-contents input[type="email"]{
+	padding: 0 15px;
+}
+.booking-tab-contents input[type="text"], .booking-tab-contents input[type="email"], .booking-tab-contents textarea, .booking-tab-contents .chosen-container{
+	border: 1px solid #C5A46D;
+    width: 75%;
+    height: 35px;
+    background: #FFFFFF;
+    color: #333333;
+}
+.data input[type="text"]{
+	width: 90%;
+}
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+    color:rgba(0,0,0,.8);
+}
+.booking-tab-contents .booking-fields{
+	position: relative;
+}
+.booking-tab-contents .booking-fields .fa{
+	position: absolute;
+	right: 60px;
+	top: 13px;
+}
+.booking-page-content .booking-container .heading-box{
+	margin-bottom: 0;
+}
+
+.booking-tab-contents input[type="text"].room{
+	text-align: center;
+	background-color: #C5A46D;
+}
+.sys p{
+	padding-top:15px;
+	font-size:24px;
+	color:#C5A46D;
+}
+.pane{
+	margin: 20px 0;
+	width: 100%;
+	float: left;
+}
+.btns{
+	width: 98%;
+	height: 40px;
+	display: inline-block;
+	margin-left: 1%;
+	color: #fff;
+	background-color: #C5A46D;
+	border-color: #C5A46D;
+	cursor: pointer;
+	font-weight: 700;
+}
+.btns:hover{
+	background-color: #b78d49;
+	border-color: #af8846;
+}
+.check-in{
+	text-align: center;
+}
+/* 订单查询 */
+.rows3>.date-container{
+	width: 40%;
+	float: left;
+	padding-left: 10%;
+}
+.rows3>.key{
+	padding-left: 0;
+}
+.rows3>.date-container span{
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 38px;
+	text-align: center;
+	color: #C5A46D;
+	margin-right: 10px;
+}
+.rows3>.date-container select{
+	width: 320px;
+	height: 40px;
+	border-color: #C5A46D;
+	padding-left: 10px;
+	color: #C5A46D;
+	font-size: 20px;
+}
+.key input:nth-of-type(1){
+	width: 320px;
+	height: 35px;
+	border: 1px solid #C5A46D;
+	padding-left: 10px;
+}
+.ss{
+	margin-left: -8px;
+	width: 54px;
+	height: 38px;
+	color: #fff;
+	background-color: #C5A46D;
+	border-color: #C5A46D;
+	cursor: pointer;
+}
+.ss:hover{
+	background-color: skyblue;
+	border-color: skyblue;
+}
+/* 关于我们 */
+.internal-page-title{
+	background-image: url(../images/banner.jpg);
+}
+.page-content{
+	text-align: center;
+}
+.iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+.iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+#dituContent{
+	width:887px;
+	height:400px;
+	border:#ccc solid 1px;
+	margin: 40px 0 0 250px;
+}
+@media screen and (max-width: 900px) {
+	#dituContent{
+	width: 100%;
+	height: 300px;
+	margin-left: 0;
+	margin-bottom: 50px;
+	}
+}
+.location{
+	font-size: 22px;
+    color:#C5A46D;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+}
+.cf-column{
+	width: 45%;
+	padding-bottom: 20px;
+	float: left;
+	padding-left: 5%;
+}
+.cf-columns{
+	width: 95%;
+	padding-left: 5%;
+}
+.innerpage-wrap{
+	background:#fff;
+	padding:55px 0 45px;
+}
+.add-msg-form input{
+	box-sizing:border-box;
+	padding:0 15px;
+	border:1px solid #ddd;
+	height:40px;line-height:40px;
+	color:#444;
+	width:100%;
+	margin-bottom:0;
+}
+.add-msg-form textarea{
+	box-sizing:border-box;
+	border:1px solid #ddd;
+	color:#333;
+	min-height:100px;
+	padding:15px;
+	color:#444;
+	width:100%;
+	margin-bottom:0;
+}
+.add-msg-form .submit-button{
+	box-sizing:border-box;
+	width: 100%;
+	line-height: 40px;
+	height: 40px;
+	float: right;
+	padding: 0px 15px;
+	border: 0px;color: #fff;
+	position: relative;
+	background-color:#333;
+	cursor:pointer;
+	font-size: 14px;
+}
+.add-msg-form .submit-button:hover,.add-msg-form .submit-button:active{
+	background-color:#D81919;
+}
+hr { 
+	margin-top: 20px; 
+	margin-bottom: 20px; 
+	border: 0; 
+	border-top: 1px solid #eeeeee; 
+}
+.cf-tarea{
+	padding-bottom: 20px;
+}
+
